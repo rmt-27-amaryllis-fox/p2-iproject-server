@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Cressida",
+    "image": "https://s2.bukalapak.com/img/2104152301/large/Kaos_Cressida_Original.jpg",
+    "stock": 20,
+    "CategoryId": 1
+  },
+  {
+    "name": "Termos",
+    "image": "https://images.tokopedia.net/img/cache/700/product-1/2018/2/10/5258250/5258250_31141bd8-fac1-4bde-9a51-ba4cd98480a8_605_632.jpg",
+    "stock": 20,
+    "CategoryId": 2
+  }
+]

@@ -34,7 +34,7 @@ class UserController {
       if (usernameCheck) throw { name: "Username must be unique" };
 
       // Register new user
-      await User.create(data);
+      await User.create({ username, email, password });
 
       // Response
       const findUser = await User.findOne({

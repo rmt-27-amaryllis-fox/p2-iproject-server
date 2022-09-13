@@ -1,0 +1,27 @@
+[
+    {
+        "name":"PLAN EASY VINES PREMIUM",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec",
+        "price":200000
+    },
+    {
+        "name":"PLAN EASY VINES",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec",
+        "price":100000
+    },
+    {
+        "name":"PLAN EASY SANSEVIERIA",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec",
+        "price":100000
+    },
+    {
+        "name":"REPOTTING PLAN 30CM",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec",
+        "price":300000
+    },
+    {
+        "name":"REPOTTING PLAN 45CM",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec",
+        "price":300000
+    }
+]

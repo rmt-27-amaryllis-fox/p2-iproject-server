@@ -31,6 +31,9 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Invalid token" || err.name === "JsonWebTokenError") {
     errCode = 401;
     message = "Invalid token";
+  } else if (err.name === "Unauthorized") {
+    errCode = 403;
+    message = "Unauthorized activity";
   }
   // else if (err.name === "Course not found") {
   //   errCode = 404;

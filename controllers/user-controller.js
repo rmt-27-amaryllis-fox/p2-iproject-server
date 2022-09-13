@@ -77,7 +77,7 @@ class UserController {
         username: findUser.username
       }
       const access_token = createToken(payload)
-      res.status(200).json({ access_token })
+      res.status(200).json({ access_token, usernameFind })
 
 
     } catch (error) {

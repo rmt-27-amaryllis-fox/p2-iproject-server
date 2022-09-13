@@ -29,5 +29,6 @@ async function authentication (req, res, next) {
 }
 route.use(authentication)
 route.get('/order', iPhone.myOrder)
+route.post('/order/:iphoneId', iPhone.addOrder)
 
 module.exports = route

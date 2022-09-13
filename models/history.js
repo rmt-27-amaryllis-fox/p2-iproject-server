@@ -9,8 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      History.belongsToMany(models.User, { foreignKey: "UserId" });
-      History.belongsToMany(models.ServiceId, { foreignKey: "ServiceId" });
     }
   }
   History.init(

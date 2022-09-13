@@ -11,6 +11,12 @@ const errHandler = (err, req, res, next) => {
     } else if (err.name === "invalid_email/pass") {
         code = 401
         message = "Invalid Email or Password"
+    } else if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
+        code = 401
+        message = "Invalid token"
+    } else if (err.name === "Unauthorized") {
+        code = 401
+        message = "Unauthorized"
     }
 
     res.status(code).json({ message });

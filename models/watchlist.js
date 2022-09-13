@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Watchlist.init({
     title: DataTypes.STRING,
-    release_year: DataTypes.INTEGER,
+    release_year: DataTypes.STRING,
     img_url: DataTypes.STRING,
     watch_provider: DataTypes.STRING,
     UserId: DataTypes.INTEGER

@@ -175,7 +175,7 @@ class Controller {
             })
 
             const detailMovie = {
-                backdrop_path: data.backdrop_path,
+                backdrop_path: config.data.images.secure_base_url + "original" + data.backdrop_path,
                 budget: data.budget,
                 genres: data.genres,
                 overview: data.overview,
@@ -192,6 +192,41 @@ class Controller {
                 }
             })
             res.status(200).json({movie: detailMovie, cast: detailCast, provider, director: director[0].name, similiar})
+        } catch (err) {
+            console.log(err);
+            next(err)
+        }
+    }
+
+    static async postWatchlist(req, res, next) {
+        try {
+            const { movieId } = req.params
+            const { data } = await tmdbInstance({
+                url: "/movie/" + movieId,
+                method: "GET"
+            })
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET"
+            })
+            const imgConfig = config.data.images.secure_base_url + "original"
+
+            let getProvider = await tmdbInstance({
+                url: `/movie/${movieId}/watch/providers`,
+                method: "GET"
+            })
+            const watch_provider = getProvider.data.results.ID.flatrate.map(el => {
+                return imgConfig + el.logo_path
+            })
+            const createWatchlist = await Watchlist.create({
+                title: data.title,
+                release_year: data.release_date,
+                img_url: imgConfig + data.poster_path,
+                watch_provider: watch_provider[0],
+                UserId: req.user.id
+            })
+            
+            res.status(201).json(createWatchlist)
         } catch (err) {
             console.log(err);
             next(err)

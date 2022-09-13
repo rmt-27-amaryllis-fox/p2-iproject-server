@@ -49,6 +49,17 @@ module.exports = (sequelize, DataTypes) => {
       profilePicture: {
         type: DataTypes.STRING,
       },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Location is required" },
+          notEmpty: { msg: "Location is required" },
+        },
+      },
     },
     {
       sequelize,

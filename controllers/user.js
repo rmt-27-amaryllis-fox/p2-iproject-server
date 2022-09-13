@@ -1,11 +1,11 @@
 const { comparePasword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
-const { User, Post } = require("../models");
+const { User } = require("../models");
 
 class UserController {
   static async register(req, res, next) {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, location } = req.body;
 
       // Check for empty input
       if (!username) {
@@ -16,6 +16,9 @@ class UserController {
       }
       if (!password) {
         throw { name: "Password is required" };
+      }
+      if (!location) {
+        throw { name: "Location is required" };
       }
 
       // Check if username/email already been used
@@ -34,7 +37,7 @@ class UserController {
       if (usernameCheck) throw { name: "Username must be unique" };
 
       // Register new user
-      await User.create({ username, email, password });
+      await User.create({ username, email, password, location });
 
       // Response
       const findUser = await User.findOne({
@@ -107,7 +110,8 @@ class UserController {
         throw { name: "User not found" };
       }
 
-      let { username, email, password, profilePicture } = req.body;
+      let { username, email, password, profilePicture, description, location } =
+        req.body;
 
       if (password) {
         password = hashPassword(password);
@@ -119,6 +123,8 @@ class UserController {
           email,
           password,
           profilePicture,
+          description,
+          location,
         },
         {
           where: {

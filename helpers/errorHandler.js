@@ -19,6 +19,9 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Password is required") {
     errCode = 400;
     message = "Password is required";
+  } else if (err.name === "Location is required") {
+    errCode = 400;
+    message = "Location is required";
   } else if (err.name === "Email must be unique") {
     errCode = 400;
     message = "Email must be unique";

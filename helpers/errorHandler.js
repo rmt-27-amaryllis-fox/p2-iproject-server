@@ -40,6 +40,9 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Forbidden") {
     errCode = 403;
     message = "You are not authorized";
+  } else if (err.name === "User not found") {
+    errCode = 404;
+    message = "User not found";
   }
 
   res.status(errCode).json({ message });

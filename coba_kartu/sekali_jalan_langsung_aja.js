@@ -17,11 +17,6 @@ async function downloadingRandomSixCardData() {
 
     let savingRawRandomCardDataToJson = fetchingRawRandomCardData.map((card) => {
       trayOfRawRandomCardData.push(card.data)
-
-      // const rawCardStringified = JSON.stringify(trayOfRawRandomCardData, null, 2);
-      // console.log(trayOfRawRandomCardData)
-
-      // fs.writeFileSync('./nampung_via_writefilesync/raw_all_card_random.json', rawCardStringified);
     })
 
     const mappedCardNImgUrl = trayOfRawRandomCardData.map((item) => {
@@ -37,10 +32,11 @@ async function downloadingRandomSixCardData() {
       }
     })
 
-    console.log(mappedCardNImgUrl)
-
+    console.log(mappedCardNImgUrl, `<<< ini fetching nya awal`)
+    return mappedCardNImgUrl
   } catch (error) {
-    console.log(error)
+    // console.log(error)
+    throw { name: 'eror-fetching-card' }
   }
 }
 

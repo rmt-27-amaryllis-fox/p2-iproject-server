@@ -1,6 +1,6 @@
-const { Post } = require("../models");
+const { Post, User } = require("../models");
 
-async function authz(req, res, next) {
+async function postAuthz(req, res, next) {
   try {
     const postId = +req.params.id;
     const userId = +req.user.id;
@@ -21,4 +21,26 @@ async function authz(req, res, next) {
   }
 }
 
-module.exports = authz;
+async function userAuthz(req, res, next) {
+  try {
+    const userId = req.user.id;
+
+    const user = await User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw { name: "User not found" };
+    } else if (user.id != userId) {
+      throw { name: "Forbidden" };
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { postAuthz, userAuthz };

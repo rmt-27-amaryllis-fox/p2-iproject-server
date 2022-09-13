@@ -1,4 +1,4 @@
-const { comparePasword } = require("../helpers/bcrypt");
+const { comparePasword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { User, Post } = require("../models");
 
@@ -93,6 +93,41 @@ class UserController {
       const loggedInUsername = findUser.username;
 
       res.status(200).json({ access_token, loggedInUsername });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async edit(req, res, next) {
+    try {
+      const userId = req.user.id;
+
+      const user = await User.findByPk(userId);
+      if (!user) {
+        throw { name: "User not found" };
+      }
+
+      let { username, email, password, profilePicture } = req.body;
+
+      if (password) {
+        password = hashPassword(password);
+      }
+
+      await User.update(
+        {
+          username,
+          email,
+          password,
+          profilePicture,
+        },
+        {
+          where: {
+            id: userId,
+          },
+        }
+      );
+
+      res.status(200).json({ message: `User data updated` });
     } catch (err) {
       next(err);
     }

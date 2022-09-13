@@ -1,4 +1,4 @@
-const {Admin, Characteristic, Customer, Order, OrderItem, Plan, PlanItem, Product, Recommendation } = require('../models')
+const {Characteristic, Customer, Order, OrderItem, Plan, PlanItem, Product, Recommendation } = require('../models')
 
 
 class ProductController{

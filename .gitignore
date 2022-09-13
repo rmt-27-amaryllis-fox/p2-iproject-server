@@ -1,2 +1,4 @@
 node_modules
 .ENV
+sandbox.js
+fanapis.js

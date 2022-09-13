@@ -1,0 +1,62 @@
+{
+    "User": [
+        {
+            "email": "user@mail.com",
+            "password": "12345678",
+            "role": "customer"
+        },
+        {
+            "email": "user1@mail.com",
+            "password": "12345678",
+            "role": "customer"
+        },
+        {
+            "email": "admin@mail.com",
+            "password": "12345678",
+            "role": "admin"
+        }
+    ],
+    "iPhone": [
+        {
+            "name": "iPhone 14",
+            "price": 799,
+            "capacity": ["512GB", "256GB", "128GB"],
+            "ram": "6GB",
+            "CPU": "Hexa-core",
+            "description": "Our longest battery life ever",
+            "imgUrl": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-model-unselect-gallery-1-202209?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1660689596976"
+        },
+        {
+            "name": "iPhone X",
+            "price": 280,
+            "capacity": ["256GB", "128GB"],
+            "ram": "3GB",
+            "CPU": "Hexa-core",
+            "description": "Like using the future of smartphones today",
+            "imgUrl": "https://cdn.eraspace.com/pub/media/wysiwyg/ibox/iphone-x/iphoneX_30-min.png"
+        },
+        {
+            "name": "iPhone 12",
+            "price": 425,
+            "capacity": ["256GB", "128GB"],
+            "ram": "4GB",
+            "CPU": "Hexa-core",
+            "description": "Thinner and Faster",
+            "imgUrl": "https://cdn.eraspace.com/pub/media/catalog/product/i/p/iphone_12_purple_1_2_1.jpg"
+        }
+    ],
+    "Bookmark": [
+        {
+            "UserId": 1,
+            "IphoneId": 1,
+            "color": "black",
+            "capacity": "256GB"
+        },
+        {
+            "UserId": 1,
+            "IphoneId": 2,
+            "color": "grey",
+            "capacity": "256GB"
+        }
+    ]
+}

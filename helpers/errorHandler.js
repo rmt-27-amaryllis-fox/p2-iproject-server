@@ -25,14 +25,14 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Username must be unique") {
     errCode = 400;
     message = "Username must be unique";
+  } else if (err.name === "Invalid email/password") {
+    errCode = 401;
+    message = "Invalid email/password";
+  } else if (err.name === "Invalid token" || err.name === "JsonWebTokenError") {
+    errCode = 401;
+    message = "Invalid token";
   }
-  // } else if (err.name === "Invalid email/password") {
-  //   errCode = 401;
-  //   message = "Invalid email/password";
-  // } else if (err.name === "Invalid token" || err.name === "JsonWebTokenError") {
-  //   errCode = 401;
-  //   message = "Invalid token";
-  // } else if (err.name === "Course not found") {
+  // else if (err.name === "Course not found") {
   //   errCode = 404;
   //   message = "Course not found";
   // } else if (err.name === "You are not authorized") {

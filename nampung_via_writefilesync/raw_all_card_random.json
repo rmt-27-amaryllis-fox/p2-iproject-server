@@ -1,0 +1,245 @@
+[
+  {
+    "id": 61692648,
+    "name": "Lionhearted Locomotive",
+    "type": "Effect Monster",
+    "desc": "When this card declares an attack: Its ATK becomes half its original ATK until the end of the Damage Step.",
+    "atk": 2400,
+    "def": 2100,
+    "level": 4,
+    "race": "Machine",
+    "attribute": "EARTH",
+    "archetype": "Train",
+    "card_sets": [
+      {
+        "set_name": "Dragons of Legend",
+        "set_code": "DRLG-EN036",
+        "set_rarity": "Super Rare",
+        "set_price": "$2.17"
+      },
+      {
+        "set_name": "Dragons of Legend: The Complete Series",
+        "set_code": "DLCS-EN038",
+        "set_rarity": "Common",
+        "set_price": "$1.11"
+      }
+    ],
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/61692648.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/61692648.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "0.10",
+        "tcgplayer_price": "0.16",
+        "ebay_price": "0.99",
+        "amazon_price": "0.84"
+      }
+    ]
+  },
+  {
+    "id": 7459919,
+    "name": "Blackwing - Zonda the Timely Night",
+    "type": "Effect Monster",
+    "desc": "You cannot Special Summon monsters from the Extra Deck, except Synchro Monsters. You can only use 1 of the following effects of \"Blackwing - Zonda the Timely Night\" per turn, and only once that turn. If this card is Normal or Special Summoned: You can target 1 monster on the field; return it to the hand. You can banish this card from your GY; Special Summon 1 Level 5 or higher \"Blackwing\" monster from your hand or Deck, then take damage equal to its ATK.",
+    "atk": 2300,
+    "def": 900,
+    "level": 6,
+    "race": "Winged Beast",
+    "attribute": "DARK",
+    "archetype": "Blackwing",
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/7459919.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/7459919.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "1.00",
+        "tcgplayer_price": "0.00",
+        "ebay_price": "1.00",
+        "amazon_price": "0.49"
+      }
+    ]
+  },
+  {
+    "id": 8251996,
+    "name": "Ojama Delta Hurricane!!",
+    "type": "Spell Card",
+    "desc": "You can only activate this card while \"Ojama Green\", \"Ojama Yellow\" and \"Ojama Black\" are face-up on your side of the field. Destroy all cards on your opponent's side of the field.",
+    "race": "Normal",
+    "archetype": "Ojama",
+    "card_sets": [
+      {
+        "set_name": "Dark Revelation Volume 2",
+        "set_code": "DR2-EN034",
+        "set_rarity": "Common",
+        "set_price": "$1.86"
+      },
+      {
+        "set_name": "Duelist Pack: Chazz Princeton",
+        "set_code": "DP2-EN018",
+        "set_rarity": "Common",
+        "set_price": "$1.73"
+      },
+      {
+        "set_name": "Invasion of Chaos",
+        "set_code": "IOC-034",
+        "set_rarity": "Short Print",
+        "set_price": "$1.17"
+      },
+      {
+        "set_name": "Invasion of Chaos",
+        "set_code": "IOC-EN034",
+        "set_rarity": "Short Print",
+        "set_price": "$0.00"
+      }
+    ],
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/8251996.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/8251996.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "0.13",
+        "tcgplayer_price": "0.15",
+        "ebay_price": "0.99",
+        "amazon_price": "1.28"
+      }
+    ]
+  },
+  {
+    "id": 33698022,
+    "name": "Black Rose Moonlight Dragon",
+    "type": "Synchro Monster",
+    "desc": "1 Tuner + 1 or more non-Tuner monsters\nIf this card is Special Summoned, or a Level 5 or higher monster(s) is Special Summoned to your opponent's side of the field: Target 1 Special Summoned monster your opponent controls; return that target to the hand. You can only use this effect of \"Black Rose Moonlight Dragon\" once per turn.",
+    "atk": 2400,
+    "def": 1800,
+    "level": 7,
+    "race": "Dragon",
+    "attribute": "LIGHT",
+    "archetype": "Rose Dragon",
+    "card_sets": [
+      {
+        "set_name": "High-Speed Riders",
+        "set_code": "HSRD-EN044",
+        "set_rarity": "Super Rare",
+        "set_price": "$6.2"
+      },
+      {
+        "set_name": "Legendary Duelists: Season 2",
+        "set_code": "LDS2-EN112",
+        "set_rarity": "Ultra Rare",
+        "set_price": "$3.55"
+      },
+      {
+        "set_name": "Yu-Gi-Oh! 5D's Volume 7 promotional card",
+        "set_code": "YF07-EN001",
+        "set_rarity": "Ultra Rare",
+        "set_price": "$13.3"
+      }
+    ],
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/33698022.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/33698022.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "0.88",
+        "tcgplayer_price": "1.81",
+        "ebay_price": "4.25",
+        "amazon_price": "9.99"
+      }
+    ]
+  },
+  {
+    "id": 65741786,
+    "name": "I:P Masquerena",
+    "type": "Link Monster",
+    "desc": "2 non-Link Monsters\r\nDuring your opponent's Main Phase, you can (Quick Effect): Immediately after this effect resolves, Link Summon 1 Link Monster using materials you control, including this card. You can only use this effect of \"I:P Masquerena\" once per turn. A Link Monster that used this card as material cannot be destroyed by your opponent's card effects.",
+    "atk": 800,
+    "race": "Cyberse",
+    "attribute": "DARK",
+    "linkval": 2,
+    "linkmarkers": [
+      "Bottom-Left",
+      "Bottom-Right"
+    ],
+    "card_sets": [
+      {
+        "set_name": "2020 Tin of Lost Memories Mega Pack",
+        "set_code": "MP20-EN178",
+        "set_rarity": "Prismatic Secret Rare",
+        "set_price": "$16.36"
+      },
+      {
+        "set_name": "Chaos Impact",
+        "set_code": "CHIM-EN049",
+        "set_rarity": "Starlight Rare",
+        "set_price": "$10.74"
+      },
+      {
+        "set_name": "Chaos Impact",
+        "set_code": "CHIM-EN049",
+        "set_rarity": "Ultra Rare",
+        "set_price": "$12.8"
+      },
+      {
+        "set_name": "Maximum Gold: El Dorado",
+        "set_code": "MGED-EN035",
+        "set_rarity": "Premium Gold Rare",
+        "set_price": "$12.17"
+      }
+    ],
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/65741786.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/65741786.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "12.64",
+        "tcgplayer_price": "7.29",
+        "ebay_price": "8.95",
+        "amazon_price": "7.92"
+      }
+    ]
+  },
+  {
+    "id": 55465441,
+    "name": "Give and Take",
+    "type": "Trap Card",
+    "desc": "Special Summon 1 monster from your Graveyard to your opponent's side of the field in Defense Position, and increase the Level of 1 monster you control by the Level of the Special Summoned monster, until the End Phase.",
+    "race": "Normal",
+    "card_sets": [
+      {
+        "set_name": "Duelist Pack: Yusei",
+        "set_code": "DP08-EN029",
+        "set_rarity": "Super Rare",
+        "set_price": "$4.49"
+      }
+    ],
+    "card_images": [
+      {
+        "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/55465441.jpg",
+        "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/55465441.jpg"
+      }
+    ],
+    "card_prices": [
+      {
+        "cardmarket_price": "0.42",
+        "tcgplayer_price": "1.61",
+        "ebay_price": "1.89",
+        "amazon_price": "1.00"
+      }
+    ]
+  }
+]

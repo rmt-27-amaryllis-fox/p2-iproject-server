@@ -15,6 +15,9 @@ const errorHandler = (err, req, res, next) => {
   ) {
     code = 400;
     message = err.errors[0].message;
+  } else if (err.name === "Invalid email/password") {
+    code = 400;
+    message = err.name;
   }
 
   res.status(code).json({ message });

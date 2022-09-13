@@ -103,6 +103,26 @@ class Controller {
             next(err);
         }
     }
+
+    static async fetchSeries(req, res, next) {
+        try {
+            const { data } = await tmdbInstance({
+                url: "/tv/popular",
+                method: "GET",
+            });
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET"
+            })
+            const series = data.results.map(({name, first_air_date, poster_path}) => {
+                let poster = config.data.images.secure_base_url + "original" + poster_path
+                return {name, first_air_date, poster}
+            })
+            res.status(200).json(series)
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = {

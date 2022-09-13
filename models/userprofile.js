@@ -15,7 +15,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   UserProfile.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `name cannot be null`
+        },
+        notEmpty: {
+          msg: `name cannot be empty`
+        }
+      }
+    },
     bio: DataTypes.TEXT,
     UserId: DataTypes.INTEGER,
     totalSpellCard: DataTypes.INTEGER,

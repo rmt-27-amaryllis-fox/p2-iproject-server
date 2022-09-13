@@ -1,18 +1,27 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('UserProfiles', {
+    await queryInterface.createTable('CardDatabases', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      cardName: {
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
+      cardType: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      bio: {
+      imageUrl: {
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
+      imageUrlShort: {
+        allowNull: false,
         type: Sequelize.TEXT
       },
       UserId: {
@@ -25,26 +34,6 @@ module.exports = {
         onUpdate: 'cascade',
         onDelete: 'cascade'
       },
-      totalSpellCard: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      totalTrapCard: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      totalMonsterCard: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      totalWin: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      totalLose: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -56,6 +45,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('UserProfiles');
+    await queryInterface.dropTable('CardDatabases');
   }
 };

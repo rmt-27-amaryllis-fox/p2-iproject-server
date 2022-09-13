@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/khansadwiputra/p2-iproject-server#readme",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
   }
 }

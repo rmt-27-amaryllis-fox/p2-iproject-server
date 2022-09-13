@@ -15,5 +15,9 @@ router.put("/employees/:id", EmployeeController.EditEmployee);
 router.get("/employees/:id", EmployeeController.FindByPkEmployee);
 
 router.get("/inventories", inventoryController.getInventory);
+router.get("/categories", inventoryController.getCategory);
 router.post("/inventories", inventoryController.AddInventory);
+router.put("/inventories/:id", inventoryController.editInventory);
+router.delete("/inventories/:id", inventoryController.deleteInventory);
+router.get("/inventories/:id", inventoryController.FindByPkInventory);
 module.exports = router;

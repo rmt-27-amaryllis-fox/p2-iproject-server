@@ -2,6 +2,7 @@ const { User } = require("../models");
 const { createToken } = require("../helper/jwt");
 const nodeMail = require("../server");
 const axios = require("axios");
+const crypto = require("crypto-js");
 class Controller {
   static async register(req, res) {
     try {
@@ -15,7 +16,7 @@ class Controller {
             payment_type: "bank_transfer",
             transaction_details: {
               gross_amount: 50000,
-              order_id: `order-${email}`,
+              order_id: `order-${Math.random()}-${email}`,
             },
             customer_details: {
               email: email,
@@ -86,13 +87,11 @@ class Controller {
         id: findUser.id,
       };
       let access_token = createToken(payload);
-      res
-        .status(200)
-        .json({
-          access_token,
-          paid: findUser.paid,
-          paymentProof: findUser.paymentProof,
-        });
+      res.status(200).json({
+        access_token,
+        paid: findUser.paid,
+        paymentProof: findUser.paymentProof,
+      });
     } catch (error) {
       console.log(error);
       if (error.name == `gak nemu`) {

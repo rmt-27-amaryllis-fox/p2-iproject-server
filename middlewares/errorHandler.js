@@ -43,6 +43,11 @@ function errorHandler(error, req, res, next) {
     res.status(404).json({ message: `Card not found ` })
   }
 
+  else if (error.name === `eror-fetching-card`) {
+    res.status(404).json({ message: `eror : api ygopro macet ` })
+  }
+
+
 
   else {
     res.status(erorrMessage.code).json(erorrMessage.response)

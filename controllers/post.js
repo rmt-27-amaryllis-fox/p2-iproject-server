@@ -20,6 +20,27 @@ class PostController {
       next(err);
     }
   }
+
+  static async posts(req, res, next) {
+    try {
+      const posts = await Post.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["username", "profilePicture"],
+          },
+        ],
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+          order: [["id", "DESC"]],
+        },
+      });
+
+      res.status(200).json(posts);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = PostController;

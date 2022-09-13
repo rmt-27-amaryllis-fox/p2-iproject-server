@@ -41,6 +41,32 @@ class PostController {
       next(err);
     }
   }
+
+  static async edit(req, res, next) {
+    try {
+      const postId = +req.params.id;
+
+      const post = await Post.findByPk(postId);
+      if (!post) {
+        throw { name: "Post not found" };
+      }
+
+      const { imageUrl, caption } = req.body;
+
+      await Post.update(
+        { imageUrl, caption },
+        {
+          where: {
+            id: postId,
+          },
+        }
+      );
+
+      res.status(200).json({ message: `Post updated` });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = PostController;

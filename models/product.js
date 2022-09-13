@@ -15,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       Product.hasOne(models.Characteristic, {
         foreignKey: 'ProductId'
       })
+      Product.hasMany(models.PlanItem, {
+        foreignKey: 'ProductId'
+      })
+      Product.belongsToMany(models.Plan, {
+        through: models.PlanItem,
+        foreignKey: 'ProductId'
+      })
     }
   }
   Product.init({

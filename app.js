@@ -13,9 +13,10 @@ app.use(cors())
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
-app.get('/', ProductController.showPlan)
 app.post('/register', AuthController.register)
 app.post('/login', AuthController.login)
+app.get('/plan', ProductController.showPlan)
+
 
 app.use(errorHandler)
 app.listen(port, () => {

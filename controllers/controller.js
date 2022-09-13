@@ -123,6 +123,81 @@ class Controller {
             next(err);
         }
     }
+
+    static async getMovieDetail(req, res, next) {
+        try {
+            const { id } = req.params
+
+            const { data } = await tmdbInstance({
+                url: "/movie/" + id,
+                method: "GET"
+            })
+            const getCast = await tmdbInstance({
+                url: `/movie/${id}/credits`,
+                method: "GET"
+            })
+            const getProvider = await tmdbInstance({
+                url: `/movie/${id}/watch/providers`,
+                method: "GET"
+            })
+            const getSimiliar = await tmdbInstance({
+                url: '/movie/' + id + '/similar',
+                method: "GET"
+            })
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET"
+            })
+
+            const {cast} = getCast.data
+            const {crew} = getCast.data
+            const director = crew.filter(el => el.job === "Director")
+            let provider = {
+                subs: getProvider.data.results.ID.flatrate.map(el => {
+                    return {
+                        name: el.provider_name,
+                        img: config.data.images.secure_base_url + "original" + el.logo_path
+                    }
+                }),
+                buy: getProvider.data.results.ID.buy.map(el => {
+                    return {
+                        name: el.provider_name,
+                        img: config.data.images.secure_base_url + "original" + el.logo_path
+                    }
+                })
+            }
+            const similiar = getSimiliar.data.results.map(el => {
+                return {
+                    title: el.title,
+                    poster_path: config.data.images.secure_base_url + "original" + el.poster_path,
+                    release_date: el.release_date
+                }
+            })
+
+            const detailMovie = {
+                backdrop_path: data.backdrop_path,
+                budget: data.budget,
+                genres: data.genres,
+                overview: data.overview,
+                release_date: data.release_date,
+                revenue: data.revenue,
+                status: data.status,
+                title: data.title,
+            }
+            const detailCast = cast.map(el => {
+                return {
+                    name: el.name,
+                    photo: config.data.images.secure_base_url + "original" + el.profile_path,
+                    as: el.character
+                }
+            })
+            res.status(200).json({movie: detailMovie, cast: detailCast, provider, director: director[0].name, similiar})
+        } catch (err) {
+            console.log(err);
+            next(err)
+        }
+    }
+
 }
 
 module.exports = {

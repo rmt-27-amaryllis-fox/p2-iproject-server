@@ -17,6 +17,12 @@ const errHandler = (err, req, res, next) => {
     } else if (err.name === "Unauthorized") {
         code = 401
         message = "Unauthorized"
+    } else if (err.name === "watchlist_not_found") {
+        code = 404
+        message = "Data not found"
+    } else if (err.name === "forbidden") {
+        code = 403
+        message = "Forbidden"
     }
 
     res.status(code).json({ message });

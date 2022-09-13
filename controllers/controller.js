@@ -228,7 +228,16 @@ class Controller {
             
             res.status(201).json(createWatchlist)
         } catch (err) {
-            console.log(err);
+            next(err)
+        }
+    }
+
+    static async deleteWatchlist(req, res, next) {
+        try {
+            const { id } = req.params
+            await Watchlist.destroy({ where: { id } })
+            res.status(200).json({message: "Success delete watchlist"})
+        } catch (err) {
             next(err)
         }
     }

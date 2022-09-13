@@ -1,0 +1,9 @@
+[
+  { "name": "BMX" },
+  { "name": "Hybrid" },
+  { "name": "Folding Bike" },
+  { "name": "Fixie" },
+  { "name": "Road Bike" },
+  { "name": "Mountain Bike" },
+  { "name": "Touring" }
+]

@@ -55,6 +55,34 @@ class Controller {
         }
     }
 
+    static async verification(req, res, next) {
+        try {
+            const { token } = req.params;
+            const verify = await User.findOne({ where: { token } });
+            if (!verify) throw { name: "invalid_token" };
+            await User.update({ status: "Verified" }, { where: { token } });
+            res.status(200).json({ message: "Success verification" });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async login(req, res, next) {
+        try {
+            const { email, password } = req.body;
+            if(!email || !password) throw { name: "invalid_email/pass" }
+            const user = await User.findOne({ where: { email } });
+            if (!user) throw { name: "invalid_email/pass" }
+            const compare = comparePass(password, user.password)
+            if (!compare) throw { name: "invalid_email/pass" }
+            const payload = { id: user.id }
+            const access_token = signToken(payload)
+            res.status(200).json({ access_token })
+        } catch (err) {
+            console.log(err);
+            next(err);
+        }
+    }
 }
 
 module.exports = {

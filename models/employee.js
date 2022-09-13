@@ -73,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      cloudinary_id: DataTypes.STRING,
     },
 
     {

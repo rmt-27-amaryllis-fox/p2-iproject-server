@@ -7,10 +7,13 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const cloudinary = require("cloudinary");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use("/assets", express.static("assets"));
 
 app.use(router);
 // app.get("/", (req, res) => {
@@ -23,13 +26,13 @@ cloudinary.config({
   api_secret: "6tOY0eRIq-BVqvJVn1SqcswcvYs",
 });
 
-cloudinary.v2.uploader.upload(
-  "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-  { public_id: "olympic_flag" },
-  function (error, result) {
-    console.log(result);
-  }
-);
+// cloudinary.v2.uploader.upload(
+//   "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
+//   { public_id: "olympic_flag" },
+//   function (error, result) {
+//     console.log(result);
+//   }
+// );
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

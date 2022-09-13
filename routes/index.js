@@ -3,15 +3,37 @@ const userController = require("../controller/user");
 const router = require("express").Router();
 const auth = require("../middleware/auth");
 const inventoryController = require("../controller/inventory");
+const multer = require("multer");
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
+
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./assets");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+
+// const upload = multer({ storage: storage });
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
 router.use(auth);
 router.get("/employees", EmployeeController.getEmployee);
-router.post("/employees", EmployeeController.AddEmployee);
+router.post(
+  "/employees",
+  upload.single("imageUrl"),
+  EmployeeController.AddEmployee
+);
 router.delete("/employees/:id", EmployeeController.DeleteEmployee);
-router.put("/employees/:id", EmployeeController.EditEmployee);
+router.put(
+  "/employees/:id",
+  upload.single("imageUrl"),
+  EmployeeController.EditEmployee
+);
 router.get("/employees/:id", EmployeeController.FindByPkEmployee);
 
 router.get("/inventories", inventoryController.getInventory);

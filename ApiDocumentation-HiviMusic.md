@@ -3,6 +3,7 @@
 List of Available Endpoints:
 
 - `GET /tweets`
+- `GET /photos`
 
 &nbsp;
 
@@ -26,6 +27,32 @@ _200 - OK_
             "text": String
         }
     }
+  }
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "data not found"
+}
+```
+
+## 1. GET /tweets
+
+#### Description
+
+- Get the user's tweet based on tweet id
+
+#### Response
+
+_200 - OK_
+
+- Body
+
+```json
+  {
+    "data": Object
   }
 ```
 

@@ -16,6 +16,7 @@ app.use(express.json())
 app.post('/register', AuthController.register)
 app.post('/login', AuthController.login)
 app.get('/plan', ProductController.showPlan)
+app.get('/plan/:id', ProductController.specifiedPlan)
 
 
 app.use(errorHandler)

@@ -26,6 +26,9 @@ const errHandler = (err, req, res, next) => {
     } else if (err.name === "not_verified") {
         code = 403
         message = "Unverified"
+    } else if (err.name === "duplicate_watchlist") {
+        code = 401
+        message = "Duplicate watchlist"
     }
 
     res.status(code).json({ message });

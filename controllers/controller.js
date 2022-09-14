@@ -124,15 +124,15 @@ class Controller {
                 method: "GET",
             });
             const series = data.results.map(
-                ({ name, first_air_date, poster_path }) => {
+                ({ id, name, first_air_date, poster_path }) => {
                     let poster =
                         config.data.images.secure_base_url +
                         "original" +
                         poster_path;
-                    return { name, first_air_date, poster };
+                    return { id, name, first_air_date, poster };
                 }
             );
-            res.status(200).json({page, series});
+            res.status(200).json({ page, series });
         } catch (err) {
             next(err);
         }
@@ -250,11 +250,14 @@ class Controller {
                 method: "GET",
             });
 
-            const imageHandler = config.data.images.secure_base_url + "original";
+            const imageHandler =
+                config.data.images.secure_base_url + "original";
 
             const { cast } = getCast.data;
             const { crew } = getCast.data;
-            const producer = crew.filter((el) => el.job === "Executive Producer");
+            const producer = crew.filter(
+                (el) => el.job === "Executive Producer"
+            );
 
             let provider = getProvider.data.results;
             if (!provider.ID || !provider.ID.flatrate) {
@@ -306,6 +309,16 @@ class Controller {
             if (checkStatus.status !== "Verified")
                 throw { name: "not_verified" };
             const { movieId } = req.params;
+
+            // check duplicate
+            const checkDuplicate = await Watchlist.findAll({
+                where: { UserId: checkStatus.id },
+            })
+
+            checkDuplicate.forEach(el => {
+                if (movieId == el.movie_id) throw { name: "duplicate_watchlist" }
+            })
+
             const { data } = await tmdbInstance({
                 url: "/movie/" + movieId,
                 method: "GET",
@@ -327,6 +340,7 @@ class Controller {
 
             res.status(201).json(createWatchlist);
         } catch (err) {
+            console.log(err);
             next(err);
         }
     }
@@ -337,6 +351,14 @@ class Controller {
             if (checkStatus.status !== "Verified")
                 throw { name: "not_verified" };
             const { seriesId } = req.params;
+             // check duplicate
+            const checkDuplicate = await Watchlist.findAll({
+                where: { UserId: checkStatus.id },
+            })
+            checkDuplicate.forEach(el => {
+                if (seriesId == el.movie_id) throw { name: "duplicate_watchlist" }
+            })
+
             const { data } = await tmdbInstance({
                 url: "/tv/" + seriesId,
                 method: "GET",
@@ -367,7 +389,7 @@ class Controller {
             const watchlists = await Watchlist.findAll({
                 where: { UserId: req.user.id },
             });
-            res.status(200).json(watchlists)
+            res.status(200).json(watchlists);
         } catch (err) {
             next(err);
         }

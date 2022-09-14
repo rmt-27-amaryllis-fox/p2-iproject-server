@@ -40,6 +40,7 @@ class AuthController {
       const access_token = createToken(payload);
       res.status(200).json({
         name: user.name,
+        premium: user.premium,
         access_token
       });
     } catch (e) {

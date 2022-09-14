@@ -23,6 +23,9 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
+      paid: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

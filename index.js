@@ -8,6 +8,7 @@ const route = require('./routes/router')
 const app = express()
 const http = require('http')
 const { Server } = require('socket.io')
+const errorHandler = require('./middlewares/errorHandler')
 const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }))
@@ -35,6 +36,7 @@ io.on('connection', (socket) => {
 })
 
 app.use(route)
+app.use(errorHandler)
 
 server.listen(port, () => {
   console.log(`app listen on port ${port}`)

@@ -113,9 +113,11 @@ class Controller {
 
     static async fetchSeries(req, res, next) {
         try {
+            const { page } = req.query;
             const { data } = await tmdbInstance({
                 url: "/tv/popular",
                 method: "GET",
+                params: { page: page },
             });
             const config = await tmdbInstance({
                 url: "/configuration",
@@ -130,7 +132,7 @@ class Controller {
                     return { name, first_air_date, poster };
                 }
             );
-            res.status(200).json(series);
+            res.status(200).json({page, series});
         } catch (err) {
             next(err);
         }
@@ -223,12 +225,82 @@ class Controller {
                 provider,
             });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
 
-    static async postWatchlist(req, res, next) {
+    static async getSeriesDetail(req, res, next) {
+        try {
+            const { id } = req.params;
+
+            const { data } = await tmdbInstance({
+                url: "/tv/" + id,
+                method: "GET",
+            });
+            const getCast = await tmdbInstance({
+                url: `/tv/${id}/credits`,
+                method: "GET",
+            });
+            const getProvider = await tmdbInstance({
+                url: `/tv/${id}/watch/providers`,
+                method: "GET",
+            });
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET",
+            });
+
+            const imageHandler = config.data.images.secure_base_url + "original";
+
+            const { cast } = getCast.data;
+            const { crew } = getCast.data;
+            const producer = crew.filter((el) => el.job === "Executive Producer");
+
+            let provider = getProvider.data.results;
+            if (!provider.ID || !provider.ID.flatrate) {
+                provider = {};
+            } else {
+                provider = provider.ID.flatrate.map((el) => {
+                    return {
+                        name: el.provider_name,
+                        img: imageHandler + el.logo_path,
+                    };
+                });
+            }
+
+            const detailSeries = {
+                id: data.id,
+                backdrop_path: imageHandler + data.backdrop_path,
+                genres: data.genres
+                    .map((el) => {
+                        return el.name;
+                    })
+                    .join(", "),
+                overview: data.overview,
+                first_air_date: data.first_air_date,
+                title: data.name,
+            };
+            const detailCast = cast
+                .map((el) => {
+                    return {
+                        name: el.name,
+                        photo: imageHandler + el.profile_path,
+                        as: el.character,
+                    };
+                })
+                .slice(0, 8);
+            res.status(200).json({
+                series: detailSeries,
+                cast: detailCast,
+                producer: producer[0].name,
+                provider,
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async postWatchlistMovie(req, res, next) {
         try {
             const checkStatus = await User.findByPk(req.user.id);
             if (checkStatus.status !== "Verified")
@@ -249,6 +321,38 @@ class Controller {
                 release_year: data.release_date,
                 img_url: imgConfig + data.poster_path,
                 movie_id: data.id,
+                kind: "movie",
+                UserId: req.user.id,
+            });
+
+            res.status(201).json(createWatchlist);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async postWatchlistSeries(req, res, next) {
+        try {
+            const checkStatus = await User.findByPk(req.user.id);
+            if (checkStatus.status !== "Verified")
+                throw { name: "not_verified" };
+            const { seriesId } = req.params;
+            const { data } = await tmdbInstance({
+                url: "/tv/" + seriesId,
+                method: "GET",
+            });
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET",
+            });
+            const imgConfig = config.data.images.secure_base_url + "original";
+
+            const createWatchlist = await Watchlist.create({
+                title: data.name,
+                release_year: data.first_air_date,
+                img_url: imgConfig + data.poster_path,
+                movie_id: data.id,
+                kind: "series",
                 UserId: req.user.id,
             });
 

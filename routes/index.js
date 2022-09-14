@@ -7,14 +7,17 @@ const router = require("express").Router();
 
 router.post("/register", Controller.register);
 router.post("/login", Controller.login);
-router.get("/movies", Controller.fetchMovie);
 router.get("/series", Controller.fetchSeries);
-router.patch("/confirmation/:token", Controller.verification);
+router.get("/movies", Controller.fetchMovie);
 router.get("/movies/:id", Controller.getMovieDetail);
-// authc
+router.get("/series/:id", Controller.getSeriesDetail);
+router.patch("/confirmation/:token", Controller.verification);
+// ---- authc -----
 router.use(authc);
+// ---- autch -----
 router.get("/watchlists", Controller.getWatchlists)
-router.post("/watchlists/:movieId", Controller.postWatchlist);
+router.post("/watchlists/movies/:movieId", Controller.postWatchlistMovie);
+router.post("/watchlists/series/:seriesId", Controller.postWatchlistSeries);
 router.delete("/watchlists/:id", authz, Controller.deleteWatchlist);
 
 module.exports = router;

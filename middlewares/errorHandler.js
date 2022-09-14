@@ -11,6 +11,12 @@ function errorHandler(error, req, res, next) {
     })
     res.status(400).json({ message: errorList })
   }
+  else if (error.name === "SequelizeDatabaseError") {
+    let errorList = error.errors.map(item => {
+      return item.message
+    })
+    res.status(400).json({ message: errorList })
+  }
 
   else if (error.name === "SequelizeUniqueConstraintError") {
     let errorList = error.errors.map(item => {

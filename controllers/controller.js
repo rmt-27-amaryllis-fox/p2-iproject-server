@@ -313,11 +313,12 @@ class Controller {
             // check duplicate
             const checkDuplicate = await Watchlist.findAll({
                 where: { UserId: checkStatus.id },
-            })
+            });
 
-            checkDuplicate.forEach(el => {
-                if (movieId == el.movie_id) throw { name: "duplicate_watchlist" }
-            })
+            checkDuplicate.forEach((el) => {
+                if (movieId == el.movie_id)
+                    throw { name: "duplicate_watchlist" };
+            });
 
             const { data } = await tmdbInstance({
                 url: "/movie/" + movieId,
@@ -351,13 +352,14 @@ class Controller {
             if (checkStatus.status !== "Verified")
                 throw { name: "not_verified" };
             const { seriesId } = req.params;
-             // check duplicate
+            // check duplicate
             const checkDuplicate = await Watchlist.findAll({
                 where: { UserId: checkStatus.id },
-            })
-            checkDuplicate.forEach(el => {
-                if (seriesId == el.movie_id) throw { name: "duplicate_watchlist" }
-            })
+            });
+            checkDuplicate.forEach((el) => {
+                if (seriesId == el.movie_id)
+                    throw { name: "duplicate_watchlist" };
+            });
 
             const { data } = await tmdbInstance({
                 url: "/tv/" + seriesId,
@@ -402,6 +404,24 @@ class Controller {
             res.status(200).json({ message: "Success delete watchlist" });
         } catch (err) {
             console.log(err);
+            next(err);
+        }
+    }
+
+    static async search(req, res, next) {
+        try {
+            const { query, page } = req.query;
+            const { data } = await tmdbInstance({
+                url: "/search/multi",
+                method: "GET",
+                params: {
+                    page,
+                    query
+                }
+            })
+            if (!data) throw { name: "no_found" }
+            res.status(200).json(data)
+        } catch (err) {
             next(err);
         }
     }

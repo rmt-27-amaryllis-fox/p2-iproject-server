@@ -19,7 +19,7 @@ const errHandler = (err, req, res, next) => {
         message = "Unauthorized"
     } else if (err.name === "watchlist_not_found") {
         code = 404
-        message = "Data not found"
+        message = "Watchlist not found"
     } else if (err.name === "forbidden") {
         code = 403
         message = "Forbidden"
@@ -29,6 +29,9 @@ const errHandler = (err, req, res, next) => {
     } else if (err.name === "duplicate_watchlist") {
         code = 401
         message = "Duplicate watchlist"
+    } else if (err.name === "no_found") {
+        code = 404
+        message = "Data not found"
     }
 
     res.status(code).json({ message });

@@ -3,9 +3,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const cors = require("cors");
-const errorHandler = require("./middleware/errHandler");
 const app = express();
 const port = process.env.PORT || 3000;
+const freeToGameRoutes = require("./routes/free-to-game-api");
+const gamePricesRoutes = require("./routes/game-prices-api");
 
 //routes
 
@@ -15,13 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //use routes
-
-
-app.use(errorHandler);
-
+app.use(freeToGameRoutes);
+app.use(gamePricesRoutes);
 
 app.listen(port, () => {
-    console.log(`masuk ${port}`);
-  });
-  
-  module.exports = app;
+  console.log(`masuk ${port}`);
+});
+
+module.exports = app;

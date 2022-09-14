@@ -33,6 +33,19 @@ class WalletController{
             next(error)
         }
     }
+
+    static async getMyWallet(req, res, next){
+        try {
+            let UserId = req.user.id
+            let findMyWallet = await Wallet.findAll({
+                where : {UserId}
+            })
+
+            res.status(200).json(findMyWallet)
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = WalletController

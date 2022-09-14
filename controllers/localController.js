@@ -24,7 +24,7 @@ class LocalClass {
       }
       res.status(200).json(response)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 
@@ -33,7 +33,7 @@ class LocalClass {
       const data = await Armor.findAll()
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 
@@ -43,7 +43,7 @@ class LocalClass {
       const data = await Shield.findAll()
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 }

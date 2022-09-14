@@ -14,13 +14,20 @@ class UserClass {
         email: data.email
       })
     } catch (err) {
-      next()
+      if (err.name == 'SequelizeValidationError') {
+        res.status(400).json({ message: err.errors[0].message})
+      } else if (err.name == 'SequelizeUniqueConstraintError') {
+        res.status(400).json({ message: 'Email must be unique'})
+      } else {
+        res.status(500).json({ message: 'Internal server error' })
+      }
     }
   }
 
   static async login(req, res, next) {
     try {
       const { email, password } = req.body
+      console.log(email, password)
       let data = await User.findOne({ where: { email } })
       if (!data) {
         throw { name: "invalidEmailPassword"}
@@ -36,7 +43,13 @@ class UserClass {
 
       res.status(200).json({ access_token })
     } catch (err) {
-      next()
+      if (err.name == 'invalidEmailPassword') {
+        res.status(401).json({ message: 'Invalid email/password' })
+      } else if (err.name == 'SequelizeValidationError') {
+        res.status(400).json({ message: err.errors[0].message})
+      } else { 
+        res.status(500).json({ message: 'Internal Server Error' })
+      }
     }
   }
 
@@ -46,7 +59,7 @@ class UserClass {
       let result = await User.findByPk(id, { attributes: { exclude: ['password'] } })
       res.status(200).json(result)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 
@@ -57,7 +70,7 @@ class UserClass {
       
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 

@@ -41,7 +41,7 @@ class FanapisController {
       })
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 
@@ -68,7 +68,7 @@ class FanapisController {
       })
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
   
@@ -95,7 +95,7 @@ class FanapisController {
       })
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
   
@@ -122,7 +122,7 @@ class FanapisController {
       })
       res.status(200).json(data)
     } catch (err) {
-      next()
+      res.status(500).json({ message: 'Internal server error' })
     }
   }
 }

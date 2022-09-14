@@ -1,4 +1,4 @@
-const { User, UserProfile } = require('../models')
+const { User, UserProfile, CardDatabase } = require('../models')
 const { comparePassword } = require('../helpers/bcrypt-password')
 const { createToken } = require('../helpers/json-web-token')
 class UserController {
@@ -81,6 +81,44 @@ class UserController {
 
 
     } catch (error) {
+      next(error)
+    }
+  }
+
+  static async showUserProfile(req, res, next) {
+    try {
+      console.log(`masok ke method showuserprofile`)
+      let UserId = req.userLogged.id
+      console.log(`dapat user id nya yang auth  : ${UserId}`)
+      let userProfileData = await User.findOne({
+        where: {
+          id: UserId
+        },
+        attributes: {
+          exclude: ['createdAt', 'updatedAt', 'password']
+        },
+        include: [
+          {
+            model: UserProfile,
+            attributes: {
+              exclude: ['createdAt', 'updatedAt']
+            },
+          },
+          {
+            model: CardDatabase,
+            attributes: {
+              exclude: ['createdAt', 'updatedAt']
+            },
+          }
+        ]
+
+      });
+      console.log(userProfileData)
+      res.status(200).json(userProfileData)
+
+
+    } catch (error) {
+      console.log(error)
       next(error)
     }
   }

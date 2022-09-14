@@ -5,8 +5,6 @@ const { User, Watchlist } = require("../models");
 
 class Controller {
 
-
-
     static async register(req, res, next) {
         try {
             const { fullname, email, password } = req.body;
@@ -43,8 +41,7 @@ class Controller {
                         {
                             type: "text/html",
                             value:
-                                "Please click this link to verify : https://vox-eight.web.app/?token=" +
-                                token,
+                                "Please click this link to verify : "+ `${process.env.BASE_URL}/${token}`,
                         },
                     ],
                 },
@@ -64,7 +61,7 @@ class Controller {
             const verify = await User.findOne({ where: { token } });
             if (!verify) throw { name: "invalid_token" };
             await User.update({ status: "Verified" }, { where: { token } });
-            res.status(200).json({ message: "Success verification" });
+            res.status(200).json({ message: "Verified" });
         } catch (err) {
             next(err);
         }

@@ -8,7 +8,7 @@ const authc = async (req, res, next) => {
       throw { name: `unauthorized` };
     } else {
       const payload = verifyToken(access_token);
-      const user = await User.findByPk(payload);
+      const user = await User.findByPk(payload.id);
       if (!user) {
         throw { name: `unauthorized` };
       } else {

@@ -16,6 +16,12 @@ function errorHandler(err, req, res, next) {
   } else if (err.name == `unauthorized`) {
     obj.code = 401;
     obj.response.message = `Unauthorized`;
+  } else if (err.name == `not found from authz`) {
+    obj.code = 401;
+    obj.response.message = `data not found from authz`;
+  } else if (err.name == `don't have authorization`) {
+    obj.code = 401;
+    obj.response.message = `don't have authorization`;
   }
   res.status(obj.code).json(obj.response);
 }

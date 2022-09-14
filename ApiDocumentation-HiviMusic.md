@@ -4,6 +4,7 @@ List of Available Endpoints:
 
 - `GET /tweets`
 - `GET /photos`
+- `POST /emails`
 
 &nbsp;
 
@@ -38,11 +39,11 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 1. GET /tweets
+## 2. GET /photos
 
 #### Description
 
-- Get the user's tweet based on tweet id
+- Get photos concert stage from pexels API
 
 #### Response
 
@@ -61,6 +62,32 @@ _Response (404 - Not Found)_
 ```json
 {
   "message": "data not found"
+}
+```
+
+## 3. POST /emails
+
+#### Description
+
+- Send emails to the band
+
+#### Response
+
+_200 - OK_
+
+- Body
+
+```json
+  {
+    "message": String
+  }
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "must fill message"
 }
 ```
 

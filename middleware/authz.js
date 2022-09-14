@@ -8,6 +8,7 @@ const authz = async (req, res, next) => {
         if (req.user.id !== findWatchlist.UserId) throw { name: "forbidden" }
         next()
     } catch (err) {
+        console.log(err);
         next(err)
     }
 }

@@ -4,7 +4,6 @@ const { signToken } = require("../helpers/jwt");
 const { User, Watchlist } = require("../models");
 
 class Controller {
-
     static async register(req, res, next) {
         try {
             const { fullname, email, password } = req.body;
@@ -41,7 +40,8 @@ class Controller {
                         {
                             type: "text/html",
                             value:
-                                "Please click this link to verify : "+ `${process.env.BASE_URL}/${token}`,
+                                "Please click this link to verify : " +
+                                `${process.env.BASE_URL}/confirmation/${token}`,
                         },
                     ],
                 },
@@ -86,21 +86,26 @@ class Controller {
 
     static async fetchMovie(req, res, next) {
         try {
-            const { page } = req.query
+            const { page } = req.query;
             const { data } = await tmdbInstance({
                 url: "/movie/popular",
                 method: "GET",
-                params: { page: page }
+                params: { page: page },
             });
             const config = await tmdbInstance({
                 url: "/configuration",
-                method: "GET"
-            })
-            const movies = data.results.map(({id, title, release_date, poster_path}) => {
-                let poster = config.data.images.secure_base_url + "original" + poster_path
-                return {id, title, release_date, poster}
-            })
-            res.status(200).json({page, movies})
+                method: "GET",
+            });
+            const movies = data.results.map(
+                ({ id, title, release_date, poster_path }) => {
+                    let poster =
+                        config.data.images.secure_base_url +
+                        "original" +
+                        poster_path;
+                    return { id, title, release_date, poster };
+                }
+            );
+            res.status(200).json({ page, movies });
         } catch (err) {
             next(err);
         }
@@ -114,13 +119,18 @@ class Controller {
             });
             const config = await tmdbInstance({
                 url: "/configuration",
-                method: "GET"
-            })
-            const series = data.results.map(({name, first_air_date, poster_path}) => {
-                let poster = config.data.images.secure_base_url + "original" + poster_path
-                return {name, first_air_date, poster}
-            })
-            res.status(200).json(series)
+                method: "GET",
+            });
+            const series = data.results.map(
+                ({ name, first_air_date, poster_path }) => {
+                    let poster =
+                        config.data.images.secure_base_url +
+                        "original" +
+                        poster_path;
+                    return { name, first_air_date, poster };
+                }
+            );
+            res.status(200).json(series);
         } catch (err) {
             next(err);
         }
@@ -128,127 +138,147 @@ class Controller {
 
     static async getMovieDetail(req, res, next) {
         try {
-            const { id } = req.params
+            const { id } = req.params;
 
             const { data } = await tmdbInstance({
                 url: "/movie/" + id,
-                method: "GET"
-            })
+                method: "GET",
+            });
             const getCast = await tmdbInstance({
                 url: `/movie/${id}/credits`,
-                method: "GET"
-            })
+                method: "GET",
+            });
             const getProvider = await tmdbInstance({
                 url: `/movie/${id}/watch/providers`,
-                method: "GET"
-            })
+                method: "GET",
+            });
             const getSimiliar = await tmdbInstance({
-                url: '/movie/' + id + '/similar',
-                method: "GET"
-            })
+                url: "/movie/" + id + "/similar",
+                method: "GET",
+            });
             const config = await tmdbInstance({
                 url: "/configuration",
-                method: "GET"
-            })
+                method: "GET",
+            });
 
-            const imageHandler = config.data.images.secure_base_url + "original"
+            const imageHandler =
+                config.data.images.secure_base_url + "original";
 
-            const {cast} = getCast.data
-            const {crew} = getCast.data
-            const director = crew.filter(el => el.job === "Director")
+            const { cast } = getCast.data;
+            const { crew } = getCast.data;
+            const director = crew.filter((el) => el.job === "Director");
 
-            let provider = getProvider.data.results
-            if (!provider.ID) {
-                provider = {}
+            let provider = getProvider.data.results;
+            if (!provider.ID || !provider.ID.flatrate) {
+                provider = {};
             } else {
-                provider.ID.flatrate.map(el => {
+                provider = provider.ID.flatrate.map((el) => {
                     return {
                         name: el.provider_name,
-                        img: imageHandler + el.logo_path
-                    }
-                })
+                        img: imageHandler + el.logo_path,
+                    };
+                });
             }
-            
-            const similiar = getSimiliar.data.results.map(el => {
-                return {
-                    id: el.id,
-                    title: el.title,
-                    poster_path: imageHandler + el.poster_path,
-                    release_date: el.release_date
-                }
-            }).slice(0, 5)
+
+            const similiar = getSimiliar.data.results
+                .map((el) => {
+                    return {
+                        id: el.id,
+                        title: el.title,
+                        poster_path: imageHandler + el.poster_path,
+                        release_date: el.release_date,
+                    };
+                })
+                .slice(0, 5);
 
             const detailMovie = {
+                id: data.id,
                 backdrop_path: imageHandler + data.backdrop_path,
                 budget: data.budget,
-                genres: data.genres.map(el => {
-                    return el.name
-                }).join(', '),
+                genres: data.genres
+                    .map((el) => {
+                        return el.name;
+                    })
+                    .join(", "),
                 overview: data.overview,
                 release_date: data.release_date,
                 revenue: data.revenue,
                 status: data.status,
                 title: data.title,
-            }
-            const detailCast = cast.map(el => {
-                return {
-                    name: el.name,
-                    photo: imageHandler + el.profile_path,
-                    as: el.character
-                }
-            }).slice(0, 8)
-            res.status(200).json({movie: detailMovie, cast: detailCast, director: director[0].name, similiar, provider})
+            };
+            const detailCast = cast
+                .map((el) => {
+                    return {
+                        name: el.name,
+                        photo: imageHandler + el.profile_path,
+                        as: el.character,
+                    };
+                })
+                .slice(0, 8);
+            res.status(200).json({
+                movie: detailMovie,
+                cast: detailCast,
+                director: director[0].name,
+                similiar,
+                provider,
+            });
         } catch (err) {
-            next(err)
+            console.log(err);
+            next(err);
         }
     }
 
     static async postWatchlist(req, res, next) {
         try {
-            const checkStatus = await User.findByPk(req.user.id)
-            if (checkStatus.status !== "Verified") throw { name: "not_verified" }
-            const { movieId } = req.params
+            const checkStatus = await User.findByPk(req.user.id);
+            if (checkStatus.status !== "Verified")
+                throw { name: "not_verified" };
+            const { movieId } = req.params;
             const { data } = await tmdbInstance({
                 url: "/movie/" + movieId,
-                method: "GET"
-            })
+                method: "GET",
+            });
             const config = await tmdbInstance({
                 url: "/configuration",
-                method: "GET"
-            })
-            const imgConfig = config.data.images.secure_base_url + "original"
+                method: "GET",
+            });
+            const imgConfig = config.data.images.secure_base_url + "original";
 
-            let getProvider = await tmdbInstance({
-                url: `/movie/${movieId}/watch/providers`,
-                method: "GET"
-            })
-            const watch_provider = getProvider.data.results.ID.flatrate.map(el => {
-                return imgConfig + el.logo_path
-            })
             const createWatchlist = await Watchlist.create({
                 title: data.title,
                 release_year: data.release_date,
                 img_url: imgConfig + data.poster_path,
-                watch_provider: watch_provider[0],
-                UserId: req.user.id
-            })
-            
-            res.status(201).json(createWatchlist)
+                movie_id: data.id,
+                UserId: req.user.id,
+            });
+
+            res.status(201).json(createWatchlist);
         } catch (err) {
-            next(err)
+            next(err);
+        }
+    }
+
+    static async getWatchlists(req, res, next) {
+        try {
+            const watchlists = await Watchlist.findAll({
+                where: { UserId: req.user.id },
+            });
+            res.status(200).json(watchlists)
+        } catch (err) {
+            next(err);
         }
     }
 
     static async deleteWatchlist(req, res, next) {
         try {
-            const { id } = req.params
-            await Watchlist.destroy({ where: { id } })
-            res.status(200).json({message: "Success delete watchlist"})
+            const { id } = req.params;
+            await Watchlist.destroy({ where: { id } });
+            res.status(200).json({ message: "Success delete watchlist" });
         } catch (err) {
-            next(err)
+            console.log(err);
+            next(err);
         }
     }
-
 }
 
 module.exports = {

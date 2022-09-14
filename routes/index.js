@@ -13,6 +13,7 @@ router.patch("/confirmation/:token", Controller.verification);
 router.get("/movies/:id", Controller.getMovieDetail);
 // authc
 router.use(authc);
+router.get("/watchlists", Controller.getWatchlists)
 router.post("/watchlists/:movieId", Controller.postWatchlist);
 router.delete("/watchlists/:id", authz, Controller.deleteWatchlist);
 

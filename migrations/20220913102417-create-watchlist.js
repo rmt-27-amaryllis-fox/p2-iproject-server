@@ -14,15 +14,15 @@ module.exports = {
       },
       release_year: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       img_url: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      watch_provider: {
+      movie_id: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       UserId: {
         allowNull: false,

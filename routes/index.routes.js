@@ -13,7 +13,7 @@ router.use(authRoutes);
 router.use('/news', newsRoutes);
 router.use('/tickers', tickerRoutes);
 router.use('/calculators', calculatorRoutes);
-router.use('/payment', paymentRoutes);
+router.use('/payments', paymentRoutes);
 router.use('/packages', premiumPackagesRoutes);
 router.use('/users', userRoutes);
 router.use('/watchlists', watchlistRoutes);

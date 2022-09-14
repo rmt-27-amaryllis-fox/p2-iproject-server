@@ -11,7 +11,8 @@ routes.use('/users', usersRoute)
 
 routes.use(authentification)
 routes.get('/myprofile', UserController.showUserProfile)
-routes.get('/cards', CardController.fetchingCards)
-routes.post('/cards', CardController.addCardToDbFromProfile)
+routes.get('/game-cards', CardController.fetchingCards)
+routes.post('/game-cards', CardController.addCardAfterGameMethod)
+routes.post('/redeem', CardController.addRedeemCardMethod)
 
 module.exports = routes

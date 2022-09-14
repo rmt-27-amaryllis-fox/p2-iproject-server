@@ -43,6 +43,11 @@ app.use((err, req, res, next) => {
         message = "Unauthorized !, please login first !"
     }
 
+    else if(err.name == "not_found"){
+        code = 404
+        message = "Data not found"
+    }
+
     res.status(code).json({message})
 })
 

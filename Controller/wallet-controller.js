@@ -1,6 +1,6 @@
 const { default: axios } = require('axios')
 const {Wallet} = require('../models')
-
+const midTransClient = require('midtrans-client')
 class WalletController{
     static async addToWallet(req, res, next){
         try {
@@ -14,6 +14,18 @@ class WalletController{
                     'x-access-token': process.env.API_KEY
                 }
             })
+
+            let conversion = await axios({
+                method : 'GET',
+                url : 'https://v6.exchangerate-api.com/v6/pair/USD/IDR',
+                headers : {
+                    Authorization : "Bearer 3dd80445a96e4c269b9f8828"
+                }
+            })
+
+            let rupiahValue = conversion.data.conversion_rate
+
+            data.data.coin.price = Math.floor(rupiahValue * data.data.coin.price)
 
             let addAsset = await Wallet.create({
                 UserId : UserId,

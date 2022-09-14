@@ -1,6 +1,12 @@
 const { comparePassword } = require('../helpers/bcrypt')
 const { createToken } = require('../helpers/jwt')
 const {User} = require('../models')
+const app = require('../app')
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
 
 class userController {
     static async register(req,res,next) {
@@ -39,6 +45,26 @@ class userController {
             res.status(200).json({token,role,username})
         } catch (err) {
             next(err)    
+        }
+    }
+
+    static async chat (req,res,next) {
+        try {
+            // io.use((socket, next) => {
+            //     const username = socket.handshake.auth.username;
+            //     if (!username) {
+            //       return next(new Error("invalid username"));
+            //     }
+            //     socket.username = username;
+            //     next();
+            //   });
+            io.on('connection', (socket) => {
+                console.log('a user connected');
+              });
+              const a = 'masuk'
+              res.status(200).json(a)
+        } catch (err) {
+            next(err)
         }
     }
 }

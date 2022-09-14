@@ -1,10 +1,9 @@
 'use strict';
-const bcrypt = require('bcryptjs')
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Address extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,35 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Cart)
-      User.hasMany(models.Address)
     }
   }
-  User.init({
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: {
-        msg: 'Email has been registered'
-      },
-      validate: {
-        notNull: {
-          msg: 'Email is required'
-        },
-        notEmpty: {
-          msg: 'Email is required'
-        },
-        isEmail: {
-          msg: 'Invalid email format'
-        }
-      }
-    },
+  Address.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: {
-        msg: 'Name has been registered'
-      },
       validate: {
         notNull: {
           msg: 'Name is required'
@@ -50,13 +26,37 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    password: DataTypes.STRING
+    street: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Street is required'
+        },
+        notEmpty: {
+          msg: 'Street is required'
+        }
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'City is required'
+        },
+        notEmpty: {
+          msg: 'City is required'
+        }
+      }
+    },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Address',
   });
-  User.addHook('beforeCreate', (user,options) => {
-    user.password = bcrypt.hashSync(user.password,10)
-  })
-  return User;
+  return Address;
 };

@@ -1,7 +1,10 @@
 const routes = require('express').Router()
 const userController = require('../controller/user')
 
+
 routes.post('/register', userController.register)
+
+routes.get('/chat', userController.chat)
 
 // routes.post('/google-sign-in', userController.googleLogin)
 

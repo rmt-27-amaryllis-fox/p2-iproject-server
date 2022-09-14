@@ -1,9 +1,16 @@
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Mailjet = require("node-mailjet");
+const mailjet = require("../mailjet-project/mailjet");
+
 class userController {
   static async register(req, res) {
     try {
+      const mailjet = new Mailjet({
+        apiKey: process.env.MJ_APIKEY_PUBLIC,
+        apiSecret: process.env.MJ_APIKEY_PRIVATE,
+      });
       let { email, password, username } = req.body;
       let data = await User.create({
         email,
@@ -11,6 +18,34 @@ class userController {
         username,
         role: "Admin",
       });
+      let request = mailjet.post("send", { version: "v3.1" }).request({
+        Messages: [
+          {
+            From: {
+              Email: "nurmizwari04@gmail.com",
+              Name: "nur",
+            },
+            To: [
+              {
+                Email: req.body.email,
+                Name: req.body.username,
+              },
+            ],
+            Subject: "(DEMO) From Laksana baru swalayan.",
+            TextPart: "Welcome",
+            HTMLPart: "<h3>Welcome! utamakan 4S salam sapa senyum dan santun",
+            CustomID: "AppGettingStartedTest",
+          },
+        ],
+      });
+      request
+        .then((result) => {
+          console.log(result.body);
+        })
+        .catch((err) => {
+          console.log(err.statusCode);
+        });
+
       res.status(200).json({ email: data.email, username: data.username });
     } catch (error) {
       console.log(error);
@@ -39,6 +74,7 @@ class userController {
         id: user.id,
         role: user.role,
       };
+
       let rahasia = process.env.JWT_TOKEN;
       let access_token = jwt.sign(payload, rahasia);
       console.log(payload);

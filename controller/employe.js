@@ -91,11 +91,14 @@ class EmployeeController {
       );
       res.status(200).json({ message: `succes edited` });
     } catch (error) {
+      console.log(error, "<<< dari controller");
       if (
         error.name == "SequelizeValidationError" ||
         error.name == "SequelizeUniqueConstraintError"
       ) {
         res.status(400).json({ message: error.errors[0].message });
+      } else if (error.name == "File type is not support") {
+        res.status(400).json({ message: "harus format jpg.jpeg dan png" });
       } else {
         res.status(500).json({ message: "Internal server error" });
       }

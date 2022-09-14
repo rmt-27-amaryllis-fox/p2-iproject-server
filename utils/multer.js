@@ -10,9 +10,9 @@ module.exports = multer({
   }),
   fileFilter: (req, file, cb) => {
     let ext = path.extname(file.originalname);
+    console.log(cb, "<<< ccb");
     if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
-      cb(new Error("File type is not support"), false);
-      return;
+      return cb(null, false, new Error("File type is not support"));
     }
     cb(null, true);
   },

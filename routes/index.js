@@ -7,17 +7,6 @@ const multer = require("multer");
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./assets");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   },
-// });
-
-// const upload = multer({ storage: storage });
-
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 

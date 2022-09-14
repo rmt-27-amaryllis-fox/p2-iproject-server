@@ -15,7 +15,7 @@ class CardController {
     }
   }
 
-  static async addCardToDbFromProfile(req, res, next) {
+  static async addRedeemCardMethod(req, res, next) {
     try {
       let UserId = req.userLogged.id
       let cardList = await downloadingRandomSixCardData()
@@ -86,11 +86,53 @@ class CardController {
     }
   }
 
-  static async addCardToDbFromButtonAddToDbClientNya(req, res, next) {
+  static async addCardAfterGameMethod(req, res, next) {
     try {
-      // let UserId = req.userLogged.id
+      let UserId = req.userLogged.id
       // let cardList = await downloadingRandomSixCardData()
-      let userCardGain
+      let {
+        pointAI,
+        pointYou
+      } = req.body
+
+      console.log(`body => ai : ${pointAI} | you : ${pointYou} `)
+
+      let totalLose
+      let totalWin
+
+      if (pointAI > pointYou) {
+        totalLose = 1
+        totalWin = 0
+      }
+      else if (pointYou > pointAI) {
+        totalWin = 1
+        totalLose = 0
+      }
+      else if (pointYou === pointAI) {
+        totalWin = 0
+        totalLose = 0
+      }
+
+      let userCardGain = req.body.cardList
+
+
+      let spellcardbody = 0
+      let trapcardbody = 0
+      let monstercardbody = 0
+
+      userCardGain.forEach((item) => {
+        if (item.type === 'Spell Card') {
+          spellcardbody += 1
+        }
+        if (item.type === 'Trap Card') {
+          trapcardbody += 1
+        }
+        if (item.type.includes('Monster')) {
+          monstercardbody += 1
+        }
+      })
+
+      console.log(`total mau masok ke db =>  win : ${totalWin} | lose : ${totalLose}`)
       // console.log(cardList)
       // let userCardGain = [cardList[0], cardList[1], cardList[2]]
       console.log(userCardGain, `<< ini yg dah splce 3`)
@@ -101,16 +143,30 @@ class CardController {
           cardType: item.type,
           imageUrl: item.image_url,
           imageUrlShort: item.image_url_small,
-          // UserId: UserId
+          UserId: UserId
           // UserId: 1
         }
-        console.log(item.name)
-        console.log(bodyCardToAdd, ` << ini per elemen di foreach`)
-        // const fillingCardToDb = CardDatabase.create(bodyCardToAdd)
+        console.log(item, `<< ini di foreach nya`)
+        // console.log(bodyCardToAdd, ` << ini per elemen di foreach`)
+        const fillingCardToDb = CardDatabase.create(bodyCardToAdd)
         // console.log(`masokin dah itu kartu ${bodyCardToAdd.cardName} `)
       })
 
-      res.status(201).json({ message: `Sukses masukin kartu ke db ` })
+
+      let addingStatsCardToUserProfile = await UserProfile.increment({
+        'totalSpellCard': spellcardbody,
+        'totalTrapCard': trapcardbody,
+        'totalMonsterCard': monstercardbody,
+        'totalWin': totalWin,
+        'totalLose': totalLose
+      },
+
+
+        { where: { UserId } }
+      );
+
+
+      res.status(201).json({ message: `Success saving cards & stats` })
 
     } catch (error) {
       console.log(error)

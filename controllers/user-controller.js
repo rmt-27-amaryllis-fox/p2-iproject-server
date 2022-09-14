@@ -106,9 +106,8 @@ class UserController {
           },
           {
             model: CardDatabase,
-            attributes: {
-              exclude: ['createdAt', 'updatedAt']
-            },
+            attributes: ['cardName', 'cardType', ['imageUrl', 'image_url'], ['imageUrlShort', 'image_url_small']],
+              // exclude: ['createdAt', 'updatedAt']
             order: [['createdAt', 'DESC']],
             limit: 3
           }

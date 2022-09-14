@@ -18,9 +18,17 @@ class TickerControllers {
         }
       })
 
+      const {data: {results : tickerNews}} = await axios.get(`https://api.polygon.io/v2/reference/news`, {
+        params: {
+          ticker: ticker.toUpperCase(),
+          apiKey: process.env.STOCK_KEY
+        }
+      })
+
       res.status(200).json({
         tickerFinancialInfo,
-        tickerDetailInfo
+        tickerDetailInfo,
+        tickerNews
       });
     }catch (e) {
       next(e);

@@ -20,6 +20,22 @@ class Controller {
       next(error);
     }
   }
+
+  static async movieById(req, res, next) {
+    try {
+      const {id} = req.params
+      const {data} = await axios({
+        method: "get",
+        url: baseUrl + `/movie/${id}`,
+        params: {
+          api_key: process.env.TMDB_API_KEY
+        }
+      })
+      res.status(200).json(data)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = Controller;

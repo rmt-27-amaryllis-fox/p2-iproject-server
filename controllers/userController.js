@@ -37,6 +37,17 @@ class Controller {
       next(error)
     }
   }
+
+  static async paid(req, res, next) {
+    try {
+      const paid = true
+      const {id} = req.user
+      const paidUpdate = await User.update({paid}, {where: {id}})
+      res.status(200).json({message: "success update paid status"})
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = Controller;

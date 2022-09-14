@@ -60,11 +60,7 @@ class Controller {
           email,
         },
       };
-      // .then((transaction) => {
-      //   // transaction token
-      //   let trans_token = transaction.token;
-      //   console.log("transactionToken:", trans_token);
-      // });
+     
       const transaction = await snap.createTransaction(parameter);
       let trans_token = transaction.token;
       

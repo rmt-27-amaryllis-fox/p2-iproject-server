@@ -23,6 +23,9 @@ const errHandler = (err, req, res, next) => {
     } else if (err.name === "forbidden") {
         code = 403
         message = "Forbidden"
+    } else if (err.name === "not_verified") {
+        code = 403
+        message = "Unverified"
     }
 
     res.status(code).json({ message });

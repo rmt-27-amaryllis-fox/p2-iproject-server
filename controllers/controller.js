@@ -295,10 +295,10 @@ class Controller {
             res.status(200).json({
                 series: detailSeries,
                 cast: detailCast,
-                producer: producer[0].name,
                 provider,
             });
         } catch (err) {
+            console.log(err);
             next(err);
         }
     }
@@ -425,26 +425,10 @@ class Controller {
                 method: "GET",
             });
             const imgHandler = config.data.images.secure_base_url + "original"
-            const searchData = data.results.map(el => {
-                if (el.media_type === 'tv') {
-                    return {
-                        id: el.id,
-                        media_type: el.media_type,
-                        title: el.name,
-                        poster_path: imgHandler + el.poster_path,
-                        release_date: el.first_air_date
-                    }
-                } else if (el.media_type === 'movie') {
-                    return {
-                        id: el.id,
-                        media_type: el.media_type,
-                        title: el.title,
-                        poster_path: imgHandler + el.poster_path,
-                        release_date: el.release_date
-                    }
-                }
+            data.results.forEach(el => {
+                el.poster_path = imgHandler + el.poster_path
             });
-            res.status(200).json({page, searchData})
+            res.status(200).json(data)
         } catch (err) {
             next(err);
         }

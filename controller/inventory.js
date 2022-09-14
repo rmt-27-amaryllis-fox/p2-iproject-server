@@ -34,7 +34,7 @@ class inventoryController {
         { name, image, stock, CategoryId },
         { where: { id } }
       );
-      res.status(200).json(data);
+      res.status(200).json({ message: "success edited" });
     } catch (error) {
       console.log(error);
       if (error.name == "SequelizeValidationError") {

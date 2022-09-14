@@ -27,7 +27,7 @@ class EmployeeController {
         cloudinary_id: result.public_id,
       });
 
-      res.status(200).json(data);
+      res.status(201).json(data);
     } catch (error) {
       if (
         error.name == "SequelizeValidationError" ||

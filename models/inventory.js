@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Category cannot empty!",
           },
           notNull: {
-            msg: "department cannot empty!",
+            msg: "Category cannot empty!",
           },
         },
       },

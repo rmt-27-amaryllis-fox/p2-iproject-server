@@ -38,7 +38,39 @@ class UserClass {
     }
   }
 
-  
+  static async bookmark(req, res, next) {
+    try {
+      const data = await Bookmark.findAll({ include: [ User ] })
+      
+      res.status(200).json(data)
+    } catch (err) {
+      res.status(500).json({ message: 'Internal Server Error' })
+    }
+  }
+
+  static async addBookmark(req, res, next) {
+    try {
+      const { rightHand, leftHand, helmet, chestArmor, gauntlet, legArmor, talisman1, talisman2, talisman3, talisman4 } = req.body
+      const { id } = req.user
+      const data = await Bookmark.create({
+        rightHand, 
+        leftHand,
+        helmet,
+        chestArmor,
+        gauntlet,
+        legArmor,
+        talisman1,
+        talisman2,
+        talisman3,
+        talisman4,
+        UserId: id
+      })
+      
+      res.status(200).json(data)
+    } catch (err) {
+      res.status(500).json({ message: 'Internal Server Error' })
+    }
+  }
 }
 
 module.exports = UserClass

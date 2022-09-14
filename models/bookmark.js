@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Bookmark.init({
+    title: DataTypes.STRING,
     rightHand: DataTypes.STRING,
     leftHand: DataTypes.STRING,
     helmet: DataTypes.STRING,

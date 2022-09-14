@@ -1,4 +1,4 @@
-const { Bookmark, Favorite, User, Weapon } = require('../models')
+const { Bookmark, Favorite, User, Weapon, Armor, Shield } = require('../models')
 const { comparePassword, generateToken, verifyToken } = require('../helper/helper')
 
 
@@ -7,7 +7,6 @@ class LocalClass {
     try {
       const { page } = req.query
       let startingPage = 0
-      console.log(req.query)
 
       if(page > 1) {
         startingPage = (page - 1) * 15
@@ -29,7 +28,24 @@ class LocalClass {
     }
   }
 
+  static async getArmor(req, res, next) {
+    try {
+      const data = await Armor.findAll()
+      res.status(200).json(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   
+  static async getShield(req, res, next) {
+    try {
+      const data = await Shield.findAll()
+      res.status(200).json(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 module.exports = LocalClass

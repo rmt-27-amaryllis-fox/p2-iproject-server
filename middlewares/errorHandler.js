@@ -11,6 +11,12 @@ function errorHandler(error, req, res, next) {
     })
     res.status(400).json({ message: errorList })
   }
+  else if (error.name === "SequelizeDatabaseError") {
+    let errorList = error.errors.map(item => {
+      return item.message
+    })
+    res.status(400).json({ message: errorList })
+  }
 
   else if (error.name === "SequelizeUniqueConstraintError") {
     let errorList = error.errors.map(item => {
@@ -42,6 +48,11 @@ function errorHandler(error, req, res, next) {
   else if (error.name === `card not found`) {
     res.status(404).json({ message: `Card not found ` })
   }
+
+  else if (error.name === `eror-fetching-card`) {
+    res.status(404).json({ message: `eror : api ygopro macet ` })
+  }
+
 
 
   else {

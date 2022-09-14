@@ -21,13 +21,11 @@ class cartController {
         UserId: req.user.id,
         MedicineId: req.params.medicineId,
       });
-      res
-        .status(201)
-        .json({
-          id: cart.id,
-          UserId: cart.UserId,
-          MedicineId: cart.MedicineId,
-        });
+      res.status(201).json({
+        id: cart.id,
+        UserId: cart.UserId,
+        MedicineId: cart.MedicineId,
+      });
     } catch (err) {
       console.log(err);
     }

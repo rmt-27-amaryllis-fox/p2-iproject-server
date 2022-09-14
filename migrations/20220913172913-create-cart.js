@@ -1,42 +1,43 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Carts', {
+    await queryInterface.createTable("Carts", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       UserId: {
         type: Sequelize.INTEGER,
+        unique: true,
         references: {
           model: "Users",
-          key: 'id'
+          key: "id",
         },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        onUpdate: "cascade",
+        onDelete: "cascade",
       },
       MedicineId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Medicines',
-          key: 'id'
+          model: "Medicines",
+          key: "id",
         },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
+        onUpdate: "cascade",
+        onDelete: "cascade",
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Carts');
-  }
+    await queryInterface.dropTable("Carts");
+  },
 };

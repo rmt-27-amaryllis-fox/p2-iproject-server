@@ -1,9 +1,9 @@
 [
-  { "name": "BMX" },
-  { "name": "Hybrid" },
-  { "name": "Folding Bike" },
-  { "name": "Fixie" },
-  { "name": "Road Bike" },
-  { "name": "Mountain Bike" },
-  { "name": "Touring" }
+  { "name": "BMX", "price": 25000 },
+  { "name": "Hybrid", "price": 25000 },
+  { "name": "Folding Bike", "price": 30000 },
+  { "name": "Fixie", "price": 20000 },
+  { "name": "Road Bike", "price": 25000 },
+  { "name": "Mountain Bike", "price": 50000 },
+  { "name": "Touring", "price": 35000 }
 ]

@@ -1,6 +1,8 @@
 const { hashPassword, comparePassword } = require("../helpers/bcrypt");
 const { User, Category, History, Service } = require("../models");
 const { createToken } = require("../helpers/jwt");
+const { Op } = require("sequelize");
+const { sequelize } = require("../models");
 
 class Controller {
   static async register(req, res, next) {
@@ -68,6 +70,10 @@ class Controller {
         CategoryId: req.body.CategoryId,
       };
       const data = await Service.create(body);
+      await History.create({
+        UserId: req.user.id,
+        ServiceId: data.id,
+      });
       res.status(200).json(data);
     } catch (error) {
       next(error);
@@ -75,10 +81,52 @@ class Controller {
   }
   static async updateStatus(req, res, next) {
     try {
-      await Service.update({ status: Done }, { where: { id: req.params.id } });
+      await Service.update(
+        { status: "Done" },
+        { where: { id: req.params.id } }
+      );
       res.status(200).json({
         message: `You're bicycle has done become to awesome`,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async queueList(req, res, next) {
+    try {
+      const data = await Service.findAll({
+        where: {
+          status: {
+            [Op.notILike]: `%done%`,
+          },
+        },
+      });
+      // const update = await data.findAll({
+      //   where: {
+      //     ServiceDate: {
+      //       [Op.lt]: new Date(
+      //         new Date(endDate).getTime() + 60 * 60 * 24 * 1000 - 1
+      //       ),
+      //       [Op.gt]: new Date(startDate),
+      //     },
+      //   },
+      // });
+      res.status(200).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async myHistory(req, res, next) {
+    try {
+      const data = await Service.findAll({
+        where: {
+          UserId: req.user.id,
+        },
+        include: {
+          model: Category,
+        },
+      });
+      res.status(200).json(data);
     } catch (error) {
       next(error);
     }

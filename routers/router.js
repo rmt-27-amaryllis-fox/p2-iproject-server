@@ -5,6 +5,7 @@ const iPhone = require('../controllers/iphone')
 const {getToken, verifyToken} = require('../helper/jwt')
 
 route.post('/login', Customer.login)
+route.post('/google-sign-in', Customer.googleSignIn)
 route.post('/register', Customer.register)
 route.get('/iPhone', iPhone.iphone)
 
@@ -30,5 +31,6 @@ async function authentication (req, res, next) {
 route.use(authentication)
 route.get('/order', iPhone.myOrder)
 route.post('/order/:iphoneId', iPhone.addOrder)
+route.delete('/order/:orderId', iPhone.deleteOrder)
 
 module.exports = route

@@ -16,15 +16,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      capacity: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       ram: {
         type: Sequelize.STRING,
         allowNull: false
       },
       CPU: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      title: {
         type: Sequelize.STRING,
         allowNull: false
       },

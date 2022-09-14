@@ -30,14 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg: "Price is required"}
       }
     },
-    capacity: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {msg: "Capacity is required"},
-        notNull: {msg: "Capacity is required"}
-      }
-    },
     ram: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -52,6 +44,14 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {msg: "CPU is required"},
         notNull: {msg: "CPU is required"}
+      }
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {msg: "title is required"},
+        notNull: {msg: "title is required"}
       }
     },
     description: {

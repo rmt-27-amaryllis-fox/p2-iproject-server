@@ -20,42 +20,42 @@
         {
             "name": "iPhone 14",
             "price": 799,
-            "capacity": ["512GB", "256GB", "128GB"],
             "ram": "6GB",
             "CPU": "Hexa-core",
+            "title": "Big and Bigger",
             "description": "Our longest battery life ever",
-            "imgUrl": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-model-unselect-gallery-1-202209?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1660689596976"
+            "imgUrl": "https://i.ibb.co/tqKBTwh/iphone-14.png"
         },
         {
             "name": "iPhone X",
             "price": 280,
-            "capacity": ["256GB", "128GB"],
             "ram": "3GB",
             "CPU": "Hexa-core",
+            "title": "The future is here",
             "description": "Like using the future of smartphones today",
-            "imgUrl": "https://cdn.eraspace.com/pub/media/wysiwyg/ibox/iphone-x/iphoneX_30-min.png"
+            "imgUrl": "https://i.ibb.co/qr1g8qR/iPhoneX.png"
         },
         {
             "name": "iPhone 12",
             "price": 425,
-            "capacity": ["256GB", "128GB"],
             "ram": "4GB",
             "CPU": "Hexa-core",
+            "title": "Its a leap Year",
             "description": "Thinner and Faster",
-            "imgUrl": "https://cdn.eraspace.com/pub/media/catalog/product/i/p/iphone_12_purple_1_2_1.jpg"
+            "imgUrl": "https://i.ibb.co/gJTdpgp/iPhone12.png"
         }
     ],
     "Bookmark": [
         {
             "UserId": 1,
             "IphoneId": 1,
-            "color": "black",
+            "color": "Silver",
             "capacity": "256GB"
         },
         {
             "UserId": 1,
             "IphoneId": 2,
-            "color": "grey",
+            "color": "Space Black",
             "capacity": "256GB"
         }
     ]

@@ -109,6 +109,8 @@ class UserController {
             attributes: {
               exclude: ['createdAt', 'updatedAt']
             },
+            order: [['createdAt', 'DESC']],
+            limit: 3
           }
         ]
 

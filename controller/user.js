@@ -40,7 +40,7 @@ class userController {
       const username = user.username;
       res.status(200).json({ token, role, username });
     } catch (err) {
-      next(err);
+      console.log(err);
     }
   }
 }

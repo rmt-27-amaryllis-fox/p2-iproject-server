@@ -32,13 +32,9 @@ class userController {
       }
       const payload = {
         id: user.id,
-        username: user.username,
-        role: user.role,
       };
       const token = createToken(payload);
-      const role = user.role;
-      const username = user.username;
-      res.status(200).json({ token, role, username });
+      res.status(200).json({ token });
     } catch (err) {
       console.log(err);
     }

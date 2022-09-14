@@ -420,7 +420,31 @@ class Controller {
                 }
             })
             if (!data) throw { name: "no_found" }
-            res.status(200).json(data)
+            const config = await tmdbInstance({
+                url: "/configuration",
+                method: "GET",
+            });
+            const imgHandler = config.data.images.secure_base_url + "original"
+            const searchData = data.results.map(el => {
+                if (el.media_type === 'tv') {
+                    return {
+                        id: el.id,
+                        media_type: el.media_type,
+                        title: el.name,
+                        poster_path: imgHandler + el.poster_path,
+                        release_date: el.first_air_date
+                    }
+                } else if (el.media_type === 'movie') {
+                    return {
+                        id: el.id,
+                        media_type: el.media_type,
+                        title: el.title,
+                        poster_path: imgHandler + el.poster_path,
+                        release_date: el.release_date
+                    }
+                }
+            });
+            res.status(200).json({page, searchData})
         } catch (err) {
             next(err);
         }

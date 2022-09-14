@@ -9,7 +9,7 @@ router.post("/register", Controller.register);
 router.post("/login", Controller.login);
 router.get("/series", Controller.fetchSeries);
 router.get("/movies", Controller.fetchMovie);
-router.get("/search", Controller.search)
+router.post("/search", Controller.search)
 router.get("/movies/:id", Controller.getMovieDetail);
 router.get("/series/:id", Controller.getSeriesDetail);
 router.patch("/confirmation/:token", Controller.verification);

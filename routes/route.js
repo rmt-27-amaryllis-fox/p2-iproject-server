@@ -11,6 +11,6 @@ routes.use('/users', usersRoute)
 routes.use(authentification)
 
 routes.get('/cards', CardController.fetchingCards)
-routes.post('/cards',)
+routes.post('/cards', CardController.addCardToDbFromProfile)
 
 module.exports = routes

@@ -20,9 +20,14 @@ app.post('/login', AuthController.login)
 app.get('/plan', ProductController.showPlan)
 app.get('/plan/:id', ProductController.specifiedPlan)
 
-
+app.get('/orderItem', authentification, OrderController.showOrderItem)
 app.post('/orderItem/:id', authentification, OrderController.addOrder)
-
+app.delete('/orderItem/:id', authentification, OrderController.delOrder)
+app.put('/orderItem/:id', authentification, OrderController.upOrder)
+app.post('/order', authentification, OrderController.compileOrder)
+app.patch('/orderItem', authentification, OrderController.inputOrderId)
+app.get('/payment/:id', authentification, OrderController.payment)
+app.get('/order/:id', authentification, OrderController.showInvoice)
 
 app.use(errorHandler)
 app.listen(port, () => {

@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.PlanItem,
         foreignKey:'PlanId'
       })
+      Plan.belongsToMany(models.Order, {
+        through: models.OrderItem,
+        foreignKey:'PlanId'
+      })
       Plan.hasMany(models.PlanItem, {
         foreignKey:'PlanId'
       })

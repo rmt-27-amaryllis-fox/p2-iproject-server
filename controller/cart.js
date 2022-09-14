@@ -1,5 +1,6 @@
 const { Cart, Medicine } = require("../models");
 const axios = require("axios");
+const midtransClient = require("midtrans-client");
 
 class cartController {
   static async getCart(req, res, next) {
@@ -61,6 +62,42 @@ class cartController {
       const id = req.params.id;
       let result = await Cart.destroy({ where: { id } });
       res.status(200).json({ message: "Success delete cart" });
+    } catch (err) {
+      next();
+    }
+  }
+
+  static async checkOut(req, res, next) {
+    try {
+      const order = req.body.order;
+      const gross = req.body.gross;
+      console.log(order, gross);
+      let snap = new midtransClient.Snap({
+        isProduction: false,
+        serverKey: "SB-Mid-server-degeBoSA2XjP6Yf9u6u8wMLL",
+      });
+
+      let parameter = {
+        transaction_details: {
+          order_id: order,
+          gross_amount: gross,
+        },
+        credit_card: {
+          secure: true,
+        },
+        customer_details: {
+          first_name: req.user.name,
+          last_name: "",
+          email: req.user.email,
+          phone: "087777777",
+        },
+      };
+      snap.createTransaction(parameter).then((transaction) => {
+        let transactionToken = transaction.token;
+        console.log("transactionToken:", transactionToken);
+        console.log(transaction);
+        res.status(201).json(transaction);
+      });
     } catch (err) {
       next();
     }

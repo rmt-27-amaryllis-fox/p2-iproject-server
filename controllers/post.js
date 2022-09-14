@@ -1,4 +1,5 @@
 const { User, Post } = require("../models");
+const { Op } = require("sequelize");
 
 class PostController {
   static async add(req, res, next) {
@@ -23,18 +24,26 @@ class PostController {
 
   static async posts(req, res, next) {
     try {
-      const posts = await Post.findAll({
+      const options = {
         include: [
           {
             model: User,
             attributes: ["username", "profilePicture"],
           },
         ],
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-          order: [["id", "DESC"]],
-        },
-      });
+        order: [["id", "DESC"]],
+      };
+
+      const filter = req.query.filter;
+      if (filter) {
+        options.where = {
+          location: {
+            [Op.iLike]: `%${filter}%`,
+          },
+        };
+      }
+
+      const posts = await Post.findAll(options);
 
       res.status(200).json(posts);
     } catch (err) {
@@ -63,6 +72,33 @@ class PostController {
       );
 
       res.status(200).json({ message: `Post updated` });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async post(req, res, next) {
+    try {
+      const id = req.params.id;
+
+      // product not found
+      const post = await Post.findOne({
+        where: {
+          id,
+        },
+        include: [
+          {
+            model: User,
+            attributes: ["username", "profilePicture"],
+          },
+        ],
+      });
+      if (!post) {
+        throw { name: "Post not found" };
+      }
+
+      // post found
+      res.status(200).json(post);
     } catch (err) {
       next(err);
     }

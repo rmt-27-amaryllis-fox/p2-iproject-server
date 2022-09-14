@@ -28,24 +28,24 @@ function errorHandler(err, req, res, next) {
   } else if (err.name === "Username must be unique") {
     errCode = 400;
     message = "Username must be unique";
-  } else if (err.name === "Invalid email/password") {
+  } else if (err.name === "Invalid username/password") {
     errCode = 401;
-    message = "Invalid email/password";
+    message = "Invalid username/password";
   } else if (err.name === "Invalid token" || err.name === "JsonWebTokenError") {
     errCode = 401;
     message = "Invalid token";
   } else if (err.name === "Unauthorized") {
     errCode = 403;
     message = "Unauthorized activity";
-  } else if (err.name === "Post not found") {
-    errCode = 404;
-    message = "Post not found";
   } else if (err.name === "Forbidden") {
     errCode = 403;
     message = "You are not authorized";
   } else if (err.name === "User not found") {
     errCode = 404;
     message = "User not found";
+  } else if (err.name === "Post not found") {
+    errCode = 404;
+    message = "Post not found";
   }
 
   res.status(errCode).json({ message });

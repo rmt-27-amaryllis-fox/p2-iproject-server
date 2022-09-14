@@ -27,15 +27,63 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    CoinId: {
+    uuid: {
       type : DataTypes.INTEGER,
       allowNull : false,
       validate : {
         notNull : {
-          msg : 'CoinId is required'
+          msg : 'UUID is required'
         },
         notEmpty : {
-          msg : 'CoinId is required'
+          msg : 'UUID is required'
+        }
+      }
+    },
+    name: {
+      type : DataTypes.STRING,
+      allowNull : false,
+      validate : {
+        notNull : {
+          msg : 'Coin Name is required'
+        },
+        notEmpty : {
+          msg : 'Coin Name is required'
+        }
+      }
+    },
+    iconUrl: {
+      type : DataTypes.STRING,
+      allowNull : false,
+      validate : {
+        notNull : {
+          msg : 'Icon URL is required'
+        },
+        notEmpty : {
+          msg : 'Icon URL is required'
+        }
+      }
+    },
+    price: {
+      type : DataTypes.INTEGER,
+      allowNull : false,
+      validate : {
+        notNull : {
+          msg : 'Coin price is required'
+        },
+        notEmpty : {
+          msg : 'Coin price is required'
+        }
+      }
+    },
+    quantity: {
+      type : DataTypes.INTEGER,
+      allowNull : false,
+      validate : {
+        notNull : {
+          msg : 'Coin quantity is required'
+        },
+        notEmpty : {
+          msg : 'Coin quantity is required'
         }
       }
     }

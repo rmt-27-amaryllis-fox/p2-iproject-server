@@ -33,11 +33,10 @@ class CoinController{
                     'x-access-token': process.env.API_KEY
                 }
             })
-
-            console.log(data)
             res.status(200).json(data.data)
         } catch (error) {
             console.log(error)
+            next(error)
         }
     }
 }

@@ -14,7 +14,19 @@ module.exports = {
           model : 'Users'
         }
       },
-      CoinId: {
+      uuid: {
+        type: Sequelize.STRING
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      iconUrl: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.INTEGER
+      },
+      quantity: {
         type: Sequelize.INTEGER
       },
       createdAt: {

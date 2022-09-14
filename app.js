@@ -28,9 +28,19 @@ app.use((err, req, res, next) => {
         message = "Password is required"
     }
 
+    else if(err.name == "SequelizeValidationError" || err.name == "SequelizeUniqueConstraintError"){
+        code = 400
+        message = err.errors[0].message
+    }
+
     else if(err.name == "invalid_email/password"){
         code = 401
         message = "Invalid email / password"
+    }
+
+    else if(err.name == "unauthorized" || err.name == "JsonWebTokenError"){
+        code = 401
+        message = "Unauthorized !, please login first !"
     }
 
     res.status(code).json({message})

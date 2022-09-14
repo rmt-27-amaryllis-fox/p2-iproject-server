@@ -50,9 +50,19 @@ class cartController {
           courier: req.body.courier,
         },
       });
-      res.status(200).json(data);
+      res.status(200).json(data.rajaongkir.results[0].costs[0].cost);
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  static async deleteItem(req, res, next) {
+    try {
+      const id = req.params.id;
+      let result = await Cart.destroy({ where: { id } });
+      res.status(200).json({ message: "Success delete cart" });
+    } catch (err) {
+      next();
     }
   }
 }

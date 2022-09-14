@@ -17,11 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       UserId: {
         type: DataTypes.INTEGER,
+      },
+      MedicineId: {
+        type: DataTypes.INTEGER,
         unique: {
           msg: "already in cart",
         },
       },
-      MedicineId: DataTypes.INTEGER,
     },
     {
       sequelize,

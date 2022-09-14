@@ -1,9 +1,10 @@
-const routes = require('express').Router()
-const cartController = require('../controller/cart')
+const routes = require("express").Router();
+const cartController = require("../controller/cart");
 
-routes.get('/mycart', cartController.getCart)
+routes.get("/mycart", cartController.getCart);
 
-routes.post('/cart/:medicineId', cartController.addToCart)
+routes.post("/cart/:medicineId", cartController.addToCart);
 
+routes.post("/cartshipping", cartController.shippingFee);
 
-module.exports = routes
+module.exports = routes;

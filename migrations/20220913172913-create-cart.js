@@ -10,7 +10,6 @@ module.exports = {
       },
       UserId: {
         type: Sequelize.INTEGER,
-        unique: true,
         references: {
           model: "Users",
           key: "id",
@@ -20,6 +19,7 @@ module.exports = {
       },
       MedicineId: {
         type: Sequelize.INTEGER,
+        unique: "true",
         references: {
           model: "Medicines",
           key: "id",

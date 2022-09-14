@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+const Mailjet = require("node-mailjet");
 class ControllerData {
   static async getTweet(req, res) {
     try {
@@ -46,6 +46,45 @@ class ControllerData {
       if ((error.message = "Request failed with status code 400")) {
         res.status(400).json({ message: "data not found" });
       } else {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  }
+  static async sendEmail(req, res) {
+    try {
+      const { message } = req.body;
+      if (!message) {
+        throw res.status(400).json({ message: "must fill message" });
+      }
+      const mailjet = Mailjet.apiConnect(
+        "04423eb1d3a3278ba737d81e7dbdfdde",
+        "371a7f52c0d5798c1d671e8da6e7d3c2"
+      );
+      const { data } = mailjet.post("send", { version: "v3.1" }).request({
+        Messages: [
+          {
+            From: {
+              Email: "kansadwiputra@gmail.com",
+              Name: "sender",
+            },
+            To: [
+              {
+                Email: "kansadwiputra@gmail.com",
+                Name: "receiver",
+              },
+            ],
+            Subject: "Message from our beloved ones!",
+            TextPart: message,
+            // HTMLPart:
+            //   '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
+          },
+        ],
+      });
+      // res.send(data);
+      res.status(200).json({ message });
+      // console.log(data, "<<<<< ini request");
+    } catch (error) {
+      if (error.status === 500) {
         res.status(500).json({ message: "Internal server error" });
       }
     }

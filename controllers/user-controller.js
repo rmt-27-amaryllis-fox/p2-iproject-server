@@ -1,6 +1,9 @@
 const { User, UserProfile, CardDatabase } = require('../models')
 const { comparePassword } = require('../helpers/bcrypt-password')
 const { createToken } = require('../helpers/json-web-token')
+const { OAuth2Client } = require('google-auth-library');
+
+
 class UserController {
   static async registerMethod(req, res, next) {
 
@@ -107,7 +110,7 @@ class UserController {
           {
             model: CardDatabase,
             attributes: ['cardName', 'cardType', ['imageUrl', 'image_url'], ['imageUrlShort', 'image_url_small']],
-              // exclude: ['createdAt', 'updatedAt']
+            // exclude: ['createdAt', 'updatedAt']
             order: [['createdAt', 'DESC']],
             limit: 3
           }
@@ -123,6 +126,89 @@ class UserController {
       next(error)
     }
   }
+
+  static async signWithGoogleOauth(req, res, next) {
+    // console.log(`masuk dari gugel auth bosku`)
+    try {
+      // console.log(`udah masuk`)
+      // terima token dari oauth gugel req header
+
+      let { token_dari_google } = req.headers
+      // console.log(req.headers, `ini full req header`)
+      // console.log(token_dari_google, `ini coba cari token gogle`)
+
+      // instantiate token tadi
+      const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+      // console.log(client, `ini coba cari token gogle`)
+
+      // verifikasi token nya
+      const ticket = await client.verifyIdToken({
+        idToken: token_dari_google,
+        audience: process.env.GOOGLE_CLIENT_ID,
+        // Specify the CLIENT_ID of the app that accesses the backend
+        // Or, if multiple clients access the backend:
+        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+      });
+      // console.log(ticket, `ini coba tiket verify token ggogle`)
+
+      // dapatin user ama emailnya di decode
+      const payload = ticket.getPayload();
+      // console.log(payload, `ini coba get payload token ggogle`)
+
+      const userid = payload['sub'];
+      // If request specified a G Suite domain:
+      // const domain = payload['hd'];
+
+
+      // cari findone
+      // kalo ga nemu userm bikin user nya baru generate acces token
+      // kalo ada, langsung generate acces token aj
+
+      let [user, created] = await User.findOrCreate({
+        where: {
+          email: payload.email
+        },
+        defaults: {
+          username: payload.name,
+          email: payload.email,
+          password: "ini_dari_google",
+        },
+        hooks: false
+      })
+
+      let createdUserProfile = await UserProfile.create({
+        name: user.username,
+        bio: 'This is a normal Bio',
+        UserId: user.id,
+        totalSpellCard: 0,
+        totalTrapCard: 0,
+        totalMonsterCard: 0,
+        totalWin: 0,
+        totalLose: 0,
+      })
+
+      // console.log(user, `<<<ini bikin user`)
+      // console.log(created, `<<<ini iscreated`)
+
+      const access_token = createToken({
+        id: user.id
+      })
+
+      // console.log(access_token, `ini coba masuk acces token`)
+      let usernameFind = user.username
+
+      res.status(200).json({ access_token, usernameFind })
+
+    }
+    catch (error) {
+      // console.log(error, `ini eror dari controller`)
+      // res.status(500).json({ message: "Internal Server Error Google" })
+      next(error)
+    }
+
+
+  }
+
 }
 
 

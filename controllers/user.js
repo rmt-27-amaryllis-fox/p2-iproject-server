@@ -1,6 +1,6 @@
 const { comparePasword, hashPassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
-const { User } = require("../models");
+const { User, Post } = require("../models");
 
 class UserController {
   static async register(req, res, next) {
@@ -37,7 +37,16 @@ class UserController {
       if (usernameCheck) throw { name: "Username must be unique" };
 
       // Register new user
-      await User.create({ username, email, password, location });
+      const profilePicture =
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
+
+      await User.create({
+        username,
+        email,
+        password,
+        location,
+        profilePicture,
+      });
 
       // Response
       const findUser = await User.findOne({
@@ -76,13 +85,13 @@ class UserController {
 
       // Check for invalid username/password
       if (!findUser) {
-        throw { name: "Invalid email/password" };
+        throw { name: "Invalid username/password" };
       }
 
       const validatePassword = comparePasword(password, findUser.password);
 
       if (!validatePassword) {
-        throw { name: "Invalid email/password" };
+        throw { name: "Invalid username/password" };
       }
 
       // Create payload & access_token
@@ -95,7 +104,11 @@ class UserController {
       // Create response
       const loggedInUsername = findUser.username;
 
-      res.status(200).json({ access_token, loggedInUsername });
+      res.status(200).json({
+        access_token,
+        loggedInUsername,
+        profilePicture: findUser.profilePicture,
+      });
     } catch (err) {
       next(err);
     }
@@ -134,6 +147,28 @@ class UserController {
       );
 
       res.status(200).json({ message: `User data updated` });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async showProfile(req, res, next) {
+    try {
+      const userId = req.user.id;
+
+      const user = await User.findOne({
+        where: {
+          id: userId,
+        },
+        attributes: { exclude: ["password"] },
+        include: [Post],
+        order: [[Post, "id", "DESC"]],
+      });
+
+      if (!user) {
+        throw { name: "User not found" };
+      }
+      res.status(200).json(user);
     } catch (err) {
       next(err);
     }

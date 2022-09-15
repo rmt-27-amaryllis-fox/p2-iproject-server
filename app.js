@@ -3,12 +3,11 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
-const app = express();
-const port = 3000;
 const cors = require("cors");
 const route = require("./routers/");
 const errorHandler = require("./helpers/errorHandler");
-// const authz = require("./middlewares/authz");
+const app = express();
+const port = 3000;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

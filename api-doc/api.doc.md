@@ -1,4 +1,7 @@
-# PRODUCTS API Documentation
+# MET Digital API Documentation
+
+MET Digital is a virtual museum where you can browse New York's MET collection. With midtrans, you may purchase arts that you like with various payment methods. Images and data gathered are accessed from metmuseum API
+
 
 ## Endpoints:
 List of available endpoints:
@@ -34,6 +37,13 @@ request:
     "message": string
 }
 ```
+***(SequelizeUniqueConstraintError || SequelizeValidationError)***
+```js
+{
+    message: err.errors[0].message
+}
+```
+
 
 # 2. POST /users/login
 description:
@@ -82,7 +92,11 @@ description:
     "redirectUrl": "https://app.sandbox.midtrans.com/snap/v2/vtweb/8ddd8e69-c51e-461b-aa86-26393fa878d6"
 }
 ```
-***(error)***
+***(401 - Unauthorized)***
+```js
+"message": "please login"
+```
+***(other)***
 automated by MidTrans ex: 409
 # 4. GET /owned
 description:
@@ -138,4 +152,13 @@ description:
 ***(401 - Unauthorized)***
 ```js
 "message": "please login"
+```
+
+# Global Error
+
+## Response
+
+***500 - Internal Server Error***
+```js
+"message": "internal server error!!"
 ```

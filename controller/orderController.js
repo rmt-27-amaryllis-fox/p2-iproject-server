@@ -261,7 +261,7 @@ class OrderController{
                 method:"GET",
                 url: "https://house-plants.p.rapidapi.com/common/"+productname,
                 headers:{
-                    'X-RapidAPI-Key': '6f3f5b72cemsh8c9794b396a8dc5p165e9djsn0d995e553cb2',
+                    'X-RapidAPI-Key': process.env.HOUSEPLANT_API,
                     'X-RapidAPI-Host': 'house-plants.p.rapidapi.com'
                 }
             })

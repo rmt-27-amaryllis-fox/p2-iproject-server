@@ -10,6 +10,7 @@ router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.post('/google-sign-in', UserController.googleSignIn)
 router.use(authentication)
+router.post("/favourites/:id", PaintingController.addFavourite)
 router.post("/owned/:id", PaintingController.addOwned)
 router.get('/owned', ownedAuthorization, PaintingController.getOwned)
 // router.post('/charge', IndexController.bankTransfer)

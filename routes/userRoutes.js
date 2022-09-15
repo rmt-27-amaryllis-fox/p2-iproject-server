@@ -4,9 +4,6 @@ const authentication = require('../middlewares/authentication')
 
 router.post('/register', Controller.register)
 router.post('/login', Controller.login)
-
-router.use(authentication)
-
-router.patch('/status', Controller.paid)
+router.patch('/status', authentication, Controller.paid)
 
 module.exports = router

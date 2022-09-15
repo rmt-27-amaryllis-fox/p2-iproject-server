@@ -32,7 +32,7 @@ class Controller {
       const payload = {id: user.id}
       const access_token = createToken(payload)
 
-      res.status(200).json({access_token})
+      res.status(200).json({access_token, paid: user.paid})
     } catch (error) {
       next(error)
     }
@@ -43,7 +43,7 @@ class Controller {
       const paid = true
       const {id} = req.user
       const paidUpdate = await User.update({paid}, {where: {id}})
-      res.status(200).json({message: "success update paid status"})
+      res.status(200).json({message: "success update paid status", paid})
     } catch (error) {
       next(error)
     }

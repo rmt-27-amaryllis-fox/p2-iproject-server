@@ -11,6 +11,8 @@ const port = process.env.PORT || 3000;
 const freeToGameRoutes = require("./routes/free-to-game-api");
 const gamePricesRoutes = require("./routes/game-prices-api");
 const user = require("./routes/user")
+const cart = require("./routes/cart")
+const transaction = require("./routes/transaction")
 app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(user)
 app.use(freeToGameRoutes);
 app.use(gamePricesRoutes);
+app.use(cart);
+app.use(transaction);
 
 app.use(errorHandler);
 

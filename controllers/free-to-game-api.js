@@ -2,7 +2,7 @@ const axios = require("axios");
 
 class Controller {
   static async gameList(req, res) {
-    let { sortby, platform, category } = req.query;
+    let { sortby, platform, category, id } = req.query;
 
     if (sortby == "") sortby = undefined;
 
@@ -14,7 +14,7 @@ class Controller {
     //   platform = "all";
     // }
 
-    const config = {
+    let config = {
       method: "get",
       url: "https://www.freetogame.com/api/games",
       params: { "sort-by": sortby, platform, category },
@@ -23,7 +23,15 @@ class Controller {
       },
     };
 
+    if (id > 0) {
+      config.url = "https://www.freetogame.com/api/game",
+      config.params = { id };
+    }
+
     try {
+
+      console.log(config)
+
       const { data } = await axios(config);
 
       return res.status(200).json(data);

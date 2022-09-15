@@ -6,11 +6,22 @@ class Controller {
   static async register(req, res, next) {
     try {
       const { username, email, password } = req.body;
+      let check = await User.findOne({
+        where : {
+          email : email
+        }
+      })
+      if(check){
+        return res.status(400).json({
+          message : "Email already exist"
+        })
+      }
       let regist = await User.create({
         username,
         email,
         password,
       });
+
       res
         .status(201)
         .json({ message: `succesful!! created ${regist.username}` });

@@ -199,7 +199,10 @@ class OrderController{
             isProduction : false,
             serverKey : process.env.SERVER_PAY
         });
+
         let targetedId = req.params.id
+        console.log(snap, 'dfeg');
+        console.log(targetedId, 'fhth');
         let selectedOrder = await Order.findOne({
             where:{
                 CustomerId:req.user.id,
@@ -210,44 +213,45 @@ class OrderController{
                 throuh: 'PlanId'
             }]
         })
+        console.log(selectedOrder, '<<selor');
         let prefix = 113333555555
         let id = ( prefix + selectedOrder.id)
+        console.log(id, '<<id');
+        // let items = selectedOrder.Plans.map((plan)=>{
+        //     let item = {
+        //         name: plan.name,
+        //         price: plan.price,
+        //         quantity: plan.OrderItem.quantity,
+        //         priceSum: plan.OrderItem.priceSum
+        //     }
+        //     return item
+        // })
+        // let parameter = {
+        //     transaction_details: {
+        //         order_id: id,
+        //         gross_amount: selectedOrder.totalPrice
+        //     },
+        //     credit_card:{
+        //         secure : true
+        //     },
+        //     item_details: items,
+        //     customer_details: {
+        //         username: selectedOrder.Customer.username,
+        //         email: selectedOrder.Customer.email,
+        //         address: selectedOrder.Customer.address
+        //     }
+        // };
 
-        let items = selectedOrder.Plans.map((plan)=>{
-            let item = {
-                name: plan.name,
-                price: plan.price,
-                quantity: plan.OrderItem.quantity,
-                priceSum: plan.OrderItem.priceSum
-            }
-            return item
-        })
-        let parameter = {
-            transaction_details: {
-                order_id: id,
-                gross_amount: selectedOrder.totalPrice
-            },
-            credit_card:{
-                secure : true
-            },
-            item_details: items,
-            customer_details: {
-                username: selectedOrder.Customer.username,
-                email: selectedOrder.Customer.email,
-                address: selectedOrder.Customer.address
-            }
-        };
-
-        snap.createTransaction(parameter)
-            .then((transaction)=>{
-                // transaction token
-                let transactionToken = transaction.token;
-                console.log('transactionToken:',transactionToken);
-                res.status(200).json({
-                    token_payment: transactionToken
-                })
-            })
-
+        // snap.createTransaction(parameter)
+        //     .then((transaction)=>{
+        //         // transaction token
+        //         let transactionToken = transaction.token;
+        //         console.log('transactionToken:',transactionToken);
+        //         res.status(200).json({
+        //             token_payment: transactionToken
+        //         })
+        //     })
+        res.status(200).json({})
         } catch (error) {
             console.log(error);
             next(error)

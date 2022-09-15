@@ -3,6 +3,7 @@ const { User, Category, History, Service } = require("../models");
 const { createToken } = require("../helpers/jwt");
 const { Op } = require("sequelize");
 const { sequelize } = require("../models");
+const createUTSdateforISO = require("../helpers/formateTime");
 
 class Controller {
   static async register(req, res, next) {
@@ -11,7 +12,7 @@ class Controller {
         email,
         password,
         username,
-        role,
+        // role,
         BirthOfDate,
         address,
         phoneNumber,
@@ -20,7 +21,7 @@ class Controller {
         email,
         password: hashPassword(password),
         username,
-        role,
+        role: `customer`,
         BirthOfDate,
         address,
         phoneNumber,
@@ -52,6 +53,7 @@ class Controller {
         id: findUser.id,
       };
       const createdToken = createToken(payload);
+
       res.status(200).json({
         access_token: createdToken,
         name: findUser.username,
@@ -63,10 +65,14 @@ class Controller {
   }
   static async services(req, res, next) {
     try {
+      // const changeDate = req.body.ServiceDate.split("-");
+      // console.log(changeDate);
+      // const dateFormatted = `${changeDate[2]}/${changeDate[1]}/${changeDate[0]}`;
+      console.log(createUTSdateforISO(req.body.ServiceDate), "dari cont");
       const body = {
         UserId: req.user.id,
         status: `Booked`,
-        ServiceDate: req.body.ServiceDate,
+        ServiceDate: createUTSdateforISO(req.body.ServiceDate),
         CategoryId: req.body.CategoryId,
       };
       const data = await Service.create(body);
@@ -100,7 +106,17 @@ class Controller {
             [Op.notILike]: `%done%`,
           },
         },
+        include: {
+          model: Category,
+        },
       });
+      // console.log(data);
+      // const newData = data.ServiceDate.split("T");
+      // const newDataAfterFormatting = data.map((el) => {
+      //   el.ServiceDate = newData[0];
+      //   return el;
+      // });
+      // console.log();
       // const update = await data.findAll({
       //   where: {
       //     ServiceDate: {
@@ -129,6 +145,14 @@ class Controller {
       res.status(200).json(data);
     } catch (error) {
       next(error);
+    }
+  }
+  static async category(req, res, next) {
+    try {
+      const data = await Category.findAll();
+      res.status(200).json(data);
+    } catch (error) {
+      nexxt(error);
     }
   }
 }

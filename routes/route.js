@@ -6,6 +6,7 @@ const authz = require("../middleware/authz");
 route.post("/register", Controller.register);
 route.post("/login", Controller.login);
 route.get("/services", Controller.queueList);
+route.get("/category", Controller.category);
 route.use(authc);
 route.post("/services", Controller.services);
 route.patch("/services/:id", authz, Controller.updateStatus);

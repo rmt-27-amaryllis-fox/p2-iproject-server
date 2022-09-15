@@ -19,7 +19,7 @@ class WalletController{
                 method : 'GET',
                 url : 'https://v6.exchangerate-api.com/v6/pair/USD/IDR',
                 headers : {
-                    Authorization : "Bearer 3dd80445a96e4c269b9f8828"
+                    Authorization : "Bearer d1b0892ce2abe2f22f29f0cb"
                 }
             })
 

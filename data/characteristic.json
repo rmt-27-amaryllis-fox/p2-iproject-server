@@ -1,0 +1,155 @@
+[
+    {
+        "ProductId":1,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": true,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":2,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":3,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":4,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": true,
+        "description": "It will be best to let it grow outdoors. Though it can be consider easy to grow, it needs special condition such as an ample sunlight and rich soil. Also, be careful to some fungal issues"
+    },
+    {
+        "ProductId":5,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": true,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":6,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":7,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":8,
+        "is_easy": false,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": true,
+        "description": "Tough originally living in rainforest with an ample amout of sunlight, Be careful of direct sunlight since it may cause burn easily"
+    },
+    {
+        "ProductId":9,
+        "is_easy": false,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":10,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": true,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":11,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":12,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":13,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":14,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":15,
+        "is_easy": true,
+        "is_small": false,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":16,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    },
+    {
+        "ProductId":17,
+        "is_easy": true,
+        "is_small": true,
+        "is_purifying": true,
+        "is_toxic": false,
+        "has_specific_condition": false,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus laoreet felis non justo pharetra, in convallis nisl fermentum. Curabitur et tellus nec nisi varius iaculis facilisis eu lectus. Nulla ultrices nulla a efficitur dictum."
+    }
+]

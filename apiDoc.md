@@ -7,9 +7,12 @@ List of available endpoints:
 - `POST /login`
 - `POST /register`
 - `GET /iPhone`
+- `GET /iPhone/:id`
 - `GET /order`
 - `POST /order/:iphoneId`
 - `DELETE /order/:orderId`
+- `POST /users/google-sign-in`
+- `POST /users/google-sign-in`
 
 &nbsp;
 
@@ -277,24 +280,6 @@ _Response (404 - Not Found)_
 
 &nbsp;
 
-## Global Error
-
-_Response (401 - Unauthorized)_
-
-```json
-{
-  "message": "Invalid token"
-}
-```
-
-_Response (500 - Internal Server Error)_
-
-```json
-{
-  "message": "Internal server error"
-}
-```
-
 ## 7. POST /users/google-sign-in
 
 Request:
@@ -321,5 +306,48 @@ _Response (401 - invalid email/password)_
 ```json
 {
   "message": "error invalid username or email or password"
+}
+```
+&nbsp;
+
+## 3. GET /iPhone
+
+Description:
+- Get one iPhone from database
+
+_Response (200 - OK)_
+
+```json
+{
+    "id": 2,
+    "name": "iPhone X",
+    "price": 280,
+    "ram": "3GB",
+    "CPU": "Hexa-core",
+    "title": "The future is here",
+    "description": "Like using the future of smartphones today",
+    "imgUrl": "https://i.ibb.co/qr1g8qR/iPhoneX.png",
+    "createdAt": "2022-09-14T11:43:15.182Z",
+    "updatedAt": "2022-09-14T11:43:15.182Z"
+}
+```
+
+&nbsp;
+
+## Global Error
+
+_Response (401 - Unauthorized)_
+
+```json
+{
+  "message": "Invalid token"
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```json
+{
+  "message": "Internal server error"
 }
 ```

@@ -8,6 +8,7 @@ route.post('/login', Customer.login)
 route.post('/google-sign-in', Customer.googleSignIn)
 route.post('/register', Customer.register)
 route.get('/iPhone', iPhone.iphone)
+route.get('/iPhone/:id', iPhone.oneIphone)
 
 async function authentication (req, res, next) {
     try {

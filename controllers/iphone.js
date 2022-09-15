@@ -72,6 +72,19 @@ class IPhone {
       res.status(500).json({ message: "Internal Server Error" });
     }
   }
+  static async oneIphone (req, res, next) {
+    try {
+      let phone = await Iphone.findOne({
+        where: {id: req.params.id}
+      });
+      if (!phone) {
+        return res.status(404).json({message: "not found"})
+      }
+      res.status(200).json(phone);
+    } catch (error) {
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
 }
 
 module.exports = IPhone;

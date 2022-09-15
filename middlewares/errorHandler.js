@@ -50,7 +50,7 @@ function errorHandler(error, req, res, next) {
   }
 
   else if (error.name === `eror-fetching-card`) {
-    res.status(404).json({ message: `eror : api ygopro macet ` })
+    res.status(400).json({ message: `eror : api ygopro macet ` })
   }
 
 

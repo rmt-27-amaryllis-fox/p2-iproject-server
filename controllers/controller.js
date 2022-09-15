@@ -129,7 +129,7 @@ class Controller {
                         config.data.images.secure_base_url +
                         "original" +
                         poster_path;
-                    return { id, name, first_air_date, poster };
+                    return { id, name, release_date: first_air_date, poster };
                 }
             );
             res.status(200).json({ page, series });

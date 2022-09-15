@@ -1,6 +1,6 @@
 const { setRandomFallback } = require("bcryptjs");
 
-const SANBOX_BASE_URL = "https://api.sandbox.midtrans.com"
+const SANBOX_BASE_URL = "https://api.sandbox.midtrans.com/v2"
 const PRODUCTION_BASE_URL = "https://api.midtrans.com/"
 
 class Config {

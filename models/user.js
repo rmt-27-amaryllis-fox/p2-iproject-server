@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       User.hasMany(models.Painting, ({foreignKey: "UserId"}))
+      User.hasMany(models.Favourite, ({foreignKey: "UserId"}))
+      User.hasMany(models.Owned, ({foreignKey: "UserId"}))
     }
   }
   User.init({

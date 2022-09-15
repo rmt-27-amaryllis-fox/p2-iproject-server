@@ -52,7 +52,6 @@ class OrderController{
             res.status(201).json(newOrder)
         } catch (error) {
             console.log(error);
-
             next(error)
         }
     }
@@ -156,6 +155,7 @@ class OrderController{
             res.status(201).json(invoice)
         } catch (error) {
             console.log(error);
+            next(error)
         }
     }
 
@@ -250,6 +250,7 @@ class OrderController{
 
         } catch (error) {
             console.log(error);
+            next(error)
         }
     }
 

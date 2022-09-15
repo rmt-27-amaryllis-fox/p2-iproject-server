@@ -79,7 +79,6 @@ class Controller {
             const access_token = signToken(payload);
             res.status(200).json({ access_token });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
@@ -222,7 +221,6 @@ class Controller {
                 provider,
             });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
@@ -338,7 +336,6 @@ class Controller {
 
             res.status(201).json(createWatchlist);
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
@@ -400,7 +397,6 @@ class Controller {
             await Watchlist.destroy({ where: { id } });
             res.status(200).json({ message: "Success delete watchlist" });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }

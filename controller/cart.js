@@ -71,7 +71,7 @@ class cartController {
     try {
       const order = req.body.order;
       const gross = req.body.gross;
-      console.log(order, gross);
+
       let snap = new midtransClient.Snap({
         isProduction: false,
         serverKey: "SB-Mid-server-degeBoSA2XjP6Yf9u6u8wMLL",

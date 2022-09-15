@@ -34,9 +34,10 @@ class userController {
         id: user.id,
       };
       const token = createToken(payload);
-      res.status(200).json({ token });
+      const userid = user.id;
+      res.status(200).json({ token, userid });
     } catch (err) {
-      console.log(err);
+      next();
     }
   }
 }

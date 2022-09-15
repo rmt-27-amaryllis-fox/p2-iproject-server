@@ -76,7 +76,7 @@ class CardController {
       // const updatingProfile = UserProfile.update({ where: UserId })
 
 
-      res.status(201).json({ message: `Sukses masukin kartu ke db ` })
+      res.status(201).json({ message: `Success Redeem Cards. Please check myprofile page ` })
 
 
     } catch (error) {

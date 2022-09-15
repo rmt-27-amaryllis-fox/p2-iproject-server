@@ -1,5 +1,6 @@
 const {Characteristic, Customer, Order, OrderItem, Plan, PlanItem, Product, Recommendation } = require('../models')
 const midtransClient = require('midtrans-client');
+const axios = require("axios")
 
 class OrderController{
     static async showOrderItem(req, res, next){
@@ -222,18 +223,18 @@ class OrderController{
             return item
         })
         let parameter = {
-            "transaction_details": {
-                "order_id": id,
-                "gross_amount": selectedOrder.totalPrice
+            transaction_details: {
+                order_id: id,
+                gross_amount: selectedOrder.totalPrice
             },
-            "credit_card":{
-                "secure" : true
+            credit_card:{
+                secure : true
             },
-            "item_details": items,
-            "customer_details": {
-                "username": selectedOrder.Customer.username,
-                "email": selectedOrder.Customer.email,
-                "address": selectedOrder.Customer.address
+            item_details: items,
+            customer_details: {
+                username: selectedOrder.Customer.username,
+                email: selectedOrder.Customer.email,
+                address: selectedOrder.Customer.address
             }
         };
 
@@ -249,6 +250,26 @@ class OrderController{
 
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    static async getRecommendation(req, res, next){
+        try {
+            console.log('hit');
+            let {productname} = req.query
+            const {data} = await axios({
+                method:"GET",
+                url: "https://house-plants.p.rapidapi.com/common/"+productname,
+                headers:{
+                    'X-RapidAPI-Key': '6f3f5b72cemsh8c9794b396a8dc5p165e9djsn0d995e553cb2',
+                    'X-RapidAPI-Host': 'house-plants.p.rapidapi.com'
+                }
+            })
+            console.log(data);
+            res.status(200).json(data)
+        } catch (error) {
+            console.log(error);
+            next(error)
         }
     }
 }

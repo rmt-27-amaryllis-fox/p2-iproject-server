@@ -28,6 +28,7 @@ app.post('/order', authentification, OrderController.compileOrder)
 app.patch('/orderItem', authentification, OrderController.inputOrderId)
 app.get('/payment/:id', authentification, OrderController.payment)
 app.get('/order/:id', authentification, OrderController.showInvoice)
+app.get('/recommendation', authentification, OrderController.getRecommendation)
 
 app.use(errorHandler)
 app.listen(port, () => {

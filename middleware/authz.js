@@ -5,7 +5,7 @@ const authz = async function authorization(req, res, next) {
     const data = await Service.findByPk(req.params.id);
     if (!data) {
       throw { name: `not found from authz` };
-    } else if (req.user.role == `admin`) {
+    } else if (req.user.role == `admin` || req.user.id == data.UserId) {
       next();
     } else {
       throw { name: `don't have authorization` };

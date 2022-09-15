@@ -4,6 +4,7 @@ const { createToken } = require("../helpers/jwt");
 const { Op } = require("sequelize");
 const { sequelize } = require("../models");
 const createUTSdateforISO = require("../helpers/formateTime");
+const midtransClient = require("midtrans-client");
 
 class Controller {
   static async register(req, res, next) {
@@ -103,7 +104,7 @@ class Controller {
       const data = await Service.findAll({
         where: {
           status: {
-            [Op.notILike]: `%done%`,
+            [Op.iLike]: `%Booked%`,
           },
         },
         include: {
@@ -136,7 +137,7 @@ class Controller {
     try {
       const data = await Service.findAll({
         where: {
-          UserId: req.user.id,
+          [Op.and]: [{ UserId: req.user.id }, { status: "Done" }],
         },
         include: {
           model: Category,
@@ -152,7 +153,51 @@ class Controller {
       const data = await Category.findAll();
       res.status(200).json(data);
     } catch (error) {
-      nexxt(error);
+      next(error);
+    }
+  }
+  static async payment(req, res, next) {
+    try {
+      let snap = new midtransClient.Snap({
+        // Set to true if you want Production Environment (accept real transaction).
+        isProduction: false,
+        serverKey: "SB-Mid-server-TuFw2frQ8cgH5JqamkLLCgyF",
+      });
+
+      let parameter = {
+        transaction_details: {
+          order_id: Date.now(),
+          gross_amount: 10000,
+        },
+        credit_card: {
+          secure: true,
+        },
+        customer_details: {
+          first_name: `${req.user.name}`,
+          email: `${req.user.email}`,
+        },
+      };
+
+      const transaction = await snap.createTransaction(parameter);
+      // transaction token
+      let transactionToken = transaction.token;
+      console.log("transactionToken:", transactionToken);
+      res.status(200).json({ transactionToken });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async paymentStatus(req, res, next) {
+    try {
+      await Service.update(
+        { status: "Paid" },
+        { where: { id: req.params.id } }
+      );
+      res.status(200).json({
+        message: `You're bicycle has paid`,
+      });
+    } catch (error) {
+      next(error);
     }
   }
 }

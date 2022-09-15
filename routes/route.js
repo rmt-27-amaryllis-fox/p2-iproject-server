@@ -11,5 +11,7 @@ route.use(authc);
 route.post("/services", Controller.services);
 route.patch("/services/:id", authz, Controller.updateStatus);
 route.get("/myHistory", Controller.myHistory);
+route.patch("/payment/:id", authz, Controller.paymentStatus);
+route.get("/payment", Controller.payment);
 
 module.exports = route;

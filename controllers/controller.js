@@ -167,8 +167,6 @@ class Controller {
                 config.data.images.secure_base_url + "original";
 
             const { cast } = getCast.data;
-            const { crew } = getCast.data;
-            const director = crew.filter((el) => el.job === "Director");
 
             let provider = getProvider.data.results;
             if (!provider.ID || !provider.ID.flatrate) {
@@ -220,11 +218,11 @@ class Controller {
             res.status(200).json({
                 movie: detailMovie,
                 cast: detailCast,
-                director: director[0].name,
                 similiar,
                 provider,
             });
         } catch (err) {
+            console.log(err);
             next(err);
         }
     }
@@ -298,7 +296,6 @@ class Controller {
                 provider,
             });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }

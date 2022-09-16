@@ -6,7 +6,7 @@ router.use(cors());
 
 router.get('/login', cors(), Controller.login);
 router.get('/callback', Controller.callback);
-router.get('/refresh_token', Controller.refreshToken);
+// router.get('/refresh_token', Controller.refreshToken);
 router.get('/users', Controller.user);
 router.get('/songs/newrelease', Controller.browseNewReleases);
 router.get('/albums/search', Controller.search);

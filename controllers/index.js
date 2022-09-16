@@ -47,32 +47,32 @@ class Controller {
                 res.redirect(`${process.env.SPOTIFY_CLIENT_REDIRECTURI}?${query}`);
             })
             .catch(error => {
-                res.send(error);
+                res.status(500).json({message: 'Internal server error'});
             });
     };
 
-    static refreshToken(req, res, next) {
-        console.log('through refresh')
-        const { refresh_token } = req.query;
-        axios({
-            method: 'post',
-            url: 'https://accounts.spotify.com/api/token',
-            data: querystring.stringify({
-                grant_type: 'refresh_token',
-                refresh_token: refresh_token
-            }),
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                Authorization: `Basic ${new Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
-            },
-        })
-            .then(response => {
-                res.send(response.data);
-            })
-            .catch(error => {
-                res.send(error);
-            });
-    };
+    // static refreshToken(req, res, next) {
+    //     console.log('through refresh')
+    //     const { refresh_token } = req.query;
+    //     axios({
+    //         method: 'post',
+    //         url: 'https://accounts.spotify.com/api/token',
+    //         data: querystring.stringify({
+    //             grant_type: 'refresh_token',
+    //             refresh_token: refresh_token
+    //         }),
+    //         headers: {
+    //             'content-type': 'application/x-www-form-urlencoded',
+    //             Authorization: `Basic ${new Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
+    //         },
+    //     })
+    //         .then(response => {
+    //             res.send(response.data);
+    //         })
+    //         .catch(error => {
+    //             res.send(error);
+    //         });
+    // };
 
     static user(req, res, next) {
         const access_token = req.headers.access_token;
@@ -84,10 +84,11 @@ class Controller {
             },
         })
             .then(response => {
-                res.send(response.data);
+                console.log(response.data)
+                res.status(200).json(response.data);
             })
             .catch(error => {
-                res.send(error);
+                res.status(error.response.data.status).json(error.response.data.message);
             });
     };
 
@@ -113,10 +114,11 @@ class Controller {
                     const artist = artistsName.join(', ')
                     return { id, name, image, artist };
                 })
+                console.log(cutData)
                 res.status(200).json(cutData);
             })
             .catch(error => {
-                res.send(error);
+                res.status(error.response.data.status).json(error.response.data.message);
             });
     };
 
@@ -147,7 +149,7 @@ class Controller {
                 res.status(200).json(cutData);
             })
             .catch(error => {
-                res.send(error);
+                res.status(error.response.data.status).json(error.response.data.message);
             });
     };
 
@@ -166,10 +168,10 @@ class Controller {
         })
             .then(response => {
                 console.log(response.data.Similar);
-                res.status(200).json(response.data.Similar.Results);
+                res.status(200).json(response.data.Similar);
             })
             .catch(error => {
-                res.send(error);
+                res.status(500).json({message: 'Internal server error'});
             });
     };
 
@@ -184,7 +186,7 @@ class Controller {
                 res.status(200).json(response);
             })
             .catch(error => {
-                res.send(error);
+                res.status(404).json({error: "No lyrics found"});
             });
     };
 
@@ -199,6 +201,7 @@ class Controller {
             },
         })
             .then(response => {
+                console.log(response.data.items)
                 res.status(200).json(response.data.items.splice(0,6));
             })
             .catch(error => {

@@ -120,7 +120,7 @@ class Controller {
             });
     };
 
-    static async search(req, res, next) {
+    static search(req, res, next) {
         const access_token = req.headers.access_token;
         const { track } = req.query;
         let condition = track ? `name=${track}&type=album` : null;
@@ -151,22 +151,37 @@ class Controller {
             });
     };
 
-    static async searchSimilar(req, res, next) {
+    static searchSimilar(req, res, next) {
         const { artist } = req.query;
         let condition = artist ? `band:${artist}` : null;
         axios({
             method: 'get',
-            url: `https://tastedive.com/api/similar?q=${condition}`,
+            url: `https://tastedive.com/api/similar`,
             params: {
-                type: 'music',
-                info: 1,
-                limit: 5,
+                q: artist,
+                Type: 'music',
+                limit: 10,
                 k: '442307-Musicali-QCYE5GJ7'
             },
         })
             .then(response => {
-                console.log(response.data.similar);
-                res.status(200).json(response.data.similar);
+                console.log(response.data.Similar);
+                res.status(200).json(response.data.Similar.Results);
+            })
+            .catch(error => {
+                res.send(error);
+            });
+    };
+
+    static searchLyrics(req, res, next) {
+        const { artist, song } = req.query;
+        let title = song;
+        axios({
+            method: 'get',
+            url: `https://api.lyrics.ovh/v1/${artist}/${title}`,
+        })
+            .then(response => {
+                res.status(200).json(response);
             })
             .catch(error => {
                 res.send(error);

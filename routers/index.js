@@ -9,8 +9,9 @@ router.get('/callback', Controller.callback);
 router.get('/refresh_token', Controller.refreshToken);
 router.get('/users', Controller.user);
 router.get('/songs/newrelease', Controller.browseNewReleases);
-router.get('/songs/search', Controller.search);
+router.get('/albums/search', Controller.search);
 router.get('/artists/search', Controller.searchSimilar);
+router.get('/lyrics/search', Controller.searchLyrics);
 router.get('/playlists/:id', Controller.fetchPlaylist);
 router.post('/playlists/:id', Controller.createPlaylist);
 

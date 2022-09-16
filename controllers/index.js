@@ -84,7 +84,6 @@ class Controller {
             },
         })
             .then(response => {
-                console.log(response)
                 res.send(response.data);
             })
             .catch(error => {
@@ -185,35 +184,36 @@ class Controller {
             },
         })
             .then(response => {
-                console.log(response)
-                res.send(response.data);
+                res.status(200).json(response.data.items.splice(0,6));
             })
             .catch(error => {
-                res.send(error);
+                res.status(error.response.data.status).json(error.response.data.message);
             });
     };
 
     static createPlaylist(req, res, next) {
-        const { name, description } = req.body;
-        const user_id = req.params.user_id
+        const { name } = req.body;
+        const access_token = req.headers.access_token;
+        const user_id = req.params.id;
         axios({
             method: 'post',
             url: `https://api.spotify.com/v1/users/${user_id}/playlists`,
-            data: querystring.stringify({
-                name,
-                description
+            body: JSON.stringify({
+                name
             }),
+            dataType: 'json',
             headers: {
                 Authorization: `Bearer ${access_token}`,
-            },
+                "Content-Type": "application/json"
+            }
         })
             .then(response => {
-                res.send(response.data);
+                res.status(201).json(response);
             })
             .catch(error => {
-                res.send(error);
+                res.status(error.response.data.status).json(error.response.data.message);
             });
-    }
+    };
 }
 
 module.exports = Controller;

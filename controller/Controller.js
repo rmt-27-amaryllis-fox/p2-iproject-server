@@ -44,10 +44,13 @@ class Controller {
         where: { email },
       });
       if (!findUser) {
+        console.log("dari usergaada");
         throw { name: `invalid email/password` };
       }
       const checkPassword = comparePassword(password, findUser.password);
       if (!checkPassword) {
+        console.log("password salahs");
+
         throw { name: `invalid email/password` };
       }
       const payload = {

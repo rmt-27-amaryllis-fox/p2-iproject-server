@@ -2,4 +2,4 @@
 Individual Project - Server
 
 tinggal npm install
-menggunakan express, sequelize,pg,jsonwebtoken,bcryptjs,cors,
+menggunakan express, sequelize,pg,jsonwebtoken,bcryptjs,cors,cloudinary,mailjet

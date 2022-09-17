@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Front-End Developer",
+    "type": "Part-Time",
+    "location": "Kyoto, Japan",
+    "requirement": "Knowledgeable in HTML, CSS, and Javascript, \n Good understanding of  AngularJS, ReactJS., \n Good understanding of asynchronous request handling, partial page updates, and AJAX.\n\n",
+    "position": "Staff",
+    "test_date": "2022-10-30T00:00:00.000Z"
+  },
+  {
+    "title": "Back-End Developer",
+    "type": "Full-Time",
+    "location": "Jakarta, Indonesia",
+    "requirement": "Must be very familiar in developing web application using NodeJS and Javascript, \n Knowledge of web services such as REST, AWS and other API, \n Expert knowledge of SQL and database technologies.\n\n",
+    "position": "Supervisor",
+    "test_date": "2022-11-10T00:00:00.000Z"
+  },
+  {
+    "title": "Back-End Developer",
+    "type": "Part-Time",
+    "location": "Jakarta, Indonesia",
+    "requirement": "Have done application implementation based on MVC Framework, \n Have another DATABASE PROGRAMMING LANGUAGE such as MySQL, Postgre, etc is highly preferable.\n\n",
+    "position": "Staff",
+    "test_date": "2022-11-11T00:00:00.000Z"
+  },
+  {
+    "title": "Front-End Developer",
+    "type": "Full-Time",
+    "location": "Bangkok, Thailand",
+    "requirement": "Knowledgeable in HTML, CSS, and Javascript, \n Proficient understanding of client-side scripting and JavaScript frameworks, including jQuery, \n Relational databases such as MySQL, \n REST API development.\n\n",
+    "position": "Staff",
+    "test_date": "2022-11-15T00:00:00.000Z"
+  }
+]
